@@ -3,10 +3,14 @@ import React from "react";
 const Navbar = () => {
     return(
         <>
-            <section className="is-relative has-background-light is-clipped"><nav className="navbar has-background-white" style={{borderBottom: '1px solid #CFD5E2'}}><div className="navbar-brand is-align-items-center">
-  <a className="navbar-item is-flex" href="#">
-    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 122.88" className=""><title>t-alphabet</title><path d="M21.47,0h81.58a19.79,19.79,0,0,1,14,5.82l.32.35a19.79,19.79,0,0,1,5.5,13.66v83.22a19.91,19.91,0,0,1-19.83,19.83H19.83A19.91,19.91,0,0,1,0,103.05V21.47A21.56,21.56,0,0,1,21.47,0ZM83.11,47H70.29V90H52.6V47H39.78V32.84H83.11V47Zm19.94-36.88H21.47A11.37,11.37,0,0,0,10.11,21.47v81.58a9.77,9.77,0,0,0,9.72,9.72h83.22a9.73,9.73,0,0,0,9.72-9.72V19.83a9.73,9.73,0,0,0-2.62-6.64l-.24-.22a9.69,9.69,0,0,0-6.86-2.86Z"></path></svg><span className="ml-16">abula</span>
-  </a>
+            <section className="is-relative has-background-light is-clipped"><nav className="navbar has-background-white" style={{zIndex: 100,borderBottom: '1px solid #CFD5E2'}}>
+                <div className="navbar-brand is-align-items-center">
+  
+                    <a className="pl-8 navbar-item">
+
+                    <img className='image' width="64" height="64" style={{minHeight: 64}} src="/images/keyboard_key_t.png"/>
+                    <span className="is-size-3">abula</span>
+                    </a>
 
   <a className="navbar-burger navbar-menu-open is-flex-touch is-align-items-center is-justify-content-center" role="button">
     <svg className="has-text-dark" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 15.4688H0V17.7207H18V15.4688Z" fill="currentColor"></path><path d="M11.0226 7.87402H0V10.126H11.0226V7.87402Z" fill="currentColor"></path><path d="M18 0.279297H0V2.53127H18V0.279297Z" fill="currentColor"></path></svg></a>
@@ -53,7 +57,7 @@ const Navbar = () => {
       </a>
     </div>
   </div>
-  </nav><div className="navbar-side has-mw-sm is-hidden is-fixed is-top-0 is-bottom-0 is-left-0 is-right-0" style={{zIndex: 0, width: '100%'}}>
+  </nav><div className="navbar-side has-mw-sm is-hidden is-fixed is-top-0 is-bottom-0 is-left-0 is-right-0" style={{zIndex: 10, width: '100%'}}>
   <div className="navbar-backdrop is-fixed is-top-0 is-bottom-0 is-left-0 has-background-dark is-fullwidth" style={{height: '100%', width: '100%', opacity: '25%'}}></div>
   <nav className="px-6 py-6 is-flex is-relative has-background-white is-flex-direction-column is-fullwidth" style={{height: '100%', width: '100%'}}><div className="mb-8 is-flex is-align-items-center">
     <a className="mr-auto is-size-4" href="#">
