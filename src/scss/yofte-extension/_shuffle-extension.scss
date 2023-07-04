@@ -1,0 +1,114 @@
+/*!
+ * Shuffle CSS Extension for Bulma
+ * Copyright 2021 The Shuffle Team
+ * Licensed under MIT 
+ */
+
+@import "maxmaxmax/variables";
+@import "variables";
+
+.notification {
+    color: $notification-color;
+    font-size: $notification-font-size;
+
+    border-top-width: $notification-border-top-width;
+    border-right-width: $notification-border-right-width;
+    border-bottom-width: $notification-border-bottom-width;
+    border-left-width: $notification-border-left-width;
+
+    border-top-right-radius: $notification-border-top-right-radius;
+    border-top-left-radius: $notification-border-top-left-radius;
+    border-bottom-right-radius: $notification-border-bottom-right-radius;
+    border-bottom-left-radius: $notification-border-bottom-left-radius;
+    
+    @each $name, $pair in $notification-colors {
+        &.is-#{$name} {
+            @if $notification-color {
+                color: $notification-color !important;
+            }
+            @if length($pair) >= 3 {
+                border-style: solid;
+                border-color: nth($pair, 3);
+            }
+            &.is-light {
+                @if $notification-color {
+                    color: $notification-color !important;
+                }
+                @if length($pair) >= 4 {
+                    border-style: solid;
+                    border-color: nth($pair, 4);
+                }
+            }
+        }
+    }
+}
+
+.navbar-item,
+.navbar-link {
+    padding: $navbar-item-padding-y $navbar-item-padding-x;
+    font-size: $navbar-item-font-size;
+    font-weight: $navbar-item-font-weight,
+}
+
+.button {
+    text-transform: $button-text-transform;
+    font-weight: $button-font-weight;
+
+    &.is-small {
+        height: $control-height-small;
+        padding-top: $control-padding-horizontal-small;
+        padding-bottom: $control-padding-horizontal-small;        
+    }
+}
+
+.input, .select, .textarea {
+    &.is-small {
+        height: $control-height-small;
+        padding-top: $control-padding-horizontal-small;
+        padding-bottom: $control-padding-horizontal-small;
+    }
+}
+
+.is-absolute { position: absolute; }
+.is-relative { position: relative; }
+.is-fixed { position: fixed; }
+.is-sticky { position: sticky; }
+
+.is-top-0 { top: 0; }
+.is-right-0 { right: 0; }
+.is-bottom-0 { bottom: 0; }
+.is-left-0 { left: 0; }
+.is-inset-0 { 
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.is-cover { object-fit: cover; }
+.is-rounded { border-radius: 999999px; }
+
+.box {
+    border-width: $box-border-width;
+    border-color: $box-border-color;
+    border-style: $box-border-style;
+}
+
+.title.has-leading-1 { line-height: $leading-1; }
+.title.has-leading-2 { line-height: $leading-2; }
+.title.has-leading-3 { line-height: $leading-3; }
+.title.has-leading-4 { line-height: $leading-4; }
+.title.has-leading-5 { line-height: $leading-5; }
+.title.has-leading-6 { line-height: $leading-6; }
+.title.has-leading-7 { line-height: $leading-7; }
+
+.subtitle.has-leading-1 { line-height: $leading-1; }
+.subtitle.has-leading-2 { line-height: $leading-2; }
+.subtitle.has-leading-3 { line-height: $leading-3; }
+.subtitle.has-leading-4 { line-height: $leading-4; }
+.subtitle.has-leading-5 { line-height: $leading-5; }
+.subtitle.has-leading-6 { line-height: $leading-6; }
+.subtitle.has-leading-7 { line-height: $leading-7; }
+
+@import "maxmaxmax/extension-max-spacing";
+@import "maxmaxmax/extension-max-width";

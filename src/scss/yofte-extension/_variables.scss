@@ -1,0 +1,151 @@
+// Variables
+// Variables
+$border: #CFD5E2 !default;
+$border-hover: #E8EDF5 !default;
+$border-light: #FAFAFA !default;
+$border-light-hover: #E8EDF5 !default;
+
+$radius: 0.375rem !default;
+$radius-small: 0.125rem !default;
+$radius-large: 0.5rem !default;
+$radius-2x-large: 0.5rem !default;
+
+$body-color: #070708 !default;
+$text: #070708 !default;
+$text-strong: #070708 !default;
+
+$primary: #F59460 !default;
+$success: #57DE8F !default;
+$info: #5475E5 !default;
+$warning: #fcd34d !default;
+$danger: #F56060 !default;
+$light: #E8EDF5 !default;
+$dark: #081132 !default;
+
+$orange: #F59460 !default;
+$yellow: #fcd34d !default;
+$green: #57DE8F !default;
+$blue: #5475E5 !default;
+$purple: #a78bfa !default;
+$red: #F56060 !default;
+
+$black-bis: #313B4E !default;
+$black-ter: #44526E !default;
+$grey-darker: #586A8D !default;
+$grey-dark: #7183A7 !default;
+$grey: #909EBB !default;
+$grey-light: #B0BACE !default;
+$grey-lighter: #CFD5E2 !default;
+$white-ter: #FAFAFA !default;
+$white-bis: #E8EDF5 !default;
+
+$link: #F59460 !default;
+$link-visited: #F59460 !default;
+$link-hover: #F27430 !default;
+$link-hover-border: #F27430 !default;
+$link-focus: #F27430 !default;
+$link-focus-border: #F27430 !default;
+$link-active: #F27430 !default;
+$link-active-border: #F27430 !default;
+
+$container-max-width: 1600px !default;
+$widescreen: 1344px !default;
+$fullhd: 1600px !default;
+
+$body-family: "DM Sans",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !default;
+
+$title-weight: 600 !default;
+$title-size: 3rem !default;
+$title-line-height: 1.5 !default;
+$title-family: "DM Sans",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !default;
+$title-color: #070708 !default;
+
+$subtitle-line-height: 1.375 !default;
+$subtitle-negative-margin: 0px !default;
+$subtitle-size: 1.125rem !default;
+$subtitle-color: #586A8D !default;
+
+$size-1: 3.5rem !default;
+$size-2: 3rem !default;
+$size-3: 2.25rem !default;
+$size-4: 1.5rem !default;
+$size-5: 1.125rem !default;
+$size-6: 1rem !default;
+$size-7: 0.875rem !default;
+
+$leading-1: 1.1 !default;
+$leading-2: 1.3 !default;
+$leading-3: 1.5 !default;
+$leading-4: 1.65 !default;
+$leading-5: 1.8 !default;
+$leading-6: 1.8 !default;
+$leading-7: 1.8 !default;
+
+$section-padding: 5rem 1.5rem !default;
+$section-padding-desktop: 5rem 3rem !default;
+
+$notification-radius: 0.25rem !default;
+
+$tag-color: #fff !default;
+$tag-radius: 0.25rem !default;
+$tag-delete-margin: 1px !default;
+
+$button-family: "DM Sans",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !default;
+$button-font-weight: 700 !default;
+$button-text-transform: uppercase !default;
+
+$size-normal: 1rem !default;
+
+$button-padding-vertical: 2rem !default;
+$button-padding-horizontal: 2rem !default;
+$button-border-width: 1px !default;
+
+$box-radius: 0.25rem !default;
+$box-shadow: none !default;
+$box-border-color: #CFD5E2 !default;
+$box-border-width: 1px !default;
+$box-border-style: solid !default;
+
+$card-radius: 0.25rem !default;
+$card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !default;
+
+$panel-radius: 0.25rem !default;
+$panel-shadow: none !default;
+
+$input-placeholder-color: #B0BACE !default;
+$input-shadow: none !default;
+$input-background-color: #fff !default;
+
+$control-height: 4.75rem !default;
+$control-height-small: 2.5rem !default;
+$control-padding-horizontal: 2rem !default;
+$control-padding-horizontal-small: 0.5rem !default;
+$control-border-width: 1px !default;
+
+$label-color: #586A8D !default;
+$label-weight: 700 !default;
+
+$navbar-height: 8rem !default;
+$navbar-padding-vertical: 1.5rem !default;
+$navbar-item-font-size: 1rem !default;
+$navbar-item-font-weight: 600 !default;
+$navbar-item-color: #070708 !default;
+$navbar-item-hover-color: #313B4E !default;
+$navbar-item-hover-background-color: transparent !default;
+$navbar-item-padding-x: 1.5rem !default;
+$navbar-item-padding-y: .5rem !default;
+$navbar-item-img-max-height: 2.25rem !default;
+
+$notification-color: null !default;
+$notification-font-size: null !default;
+
+$notification-border-width: 0 !default;
+$notification-border-top-width: $notification-border-width !default;
+$notification-border-right-width: $notification-border-width !default;
+$notification-border-bottom-width: $notification-border-width !default;
+$notification-border-left-width: $notification-border-width !default;
+
+$notification-border-top-right-radius: $notification-radius !default;
+$notification-border-top-left-radius: $notification-radius !default;
+$notification-border-bottom-right-radius: $notification-radius !default;
+$notification-border-bottom-left-radius: $notification-radius !default;
