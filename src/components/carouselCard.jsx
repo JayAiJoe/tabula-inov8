@@ -10,8 +10,8 @@ const CarouselCard = ({labels, products}) => {
             <p className="title is-3">{labels.title}</p>
             <p className="subtitle is-5">{labels.subtitle}</p>
             <Carousel show={5} slide={1} leftArrow={<CarouselButton direction={-1}/>} rightArrow={<CarouselButton direction={1}/>}>
-                {products.map((product) => (
-                  <ProductCard info={product}/>
+                {products.map((product, index) => (
+                  <ProductCard info={product} key={index}/>
                 ))}
             </Carousel>
         </div>

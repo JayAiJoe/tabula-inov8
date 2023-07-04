@@ -31,7 +31,7 @@ export default function Project({ projectData }) {
         <section className='section is-clipped'>
           <div className='container'>
             <div className='mb-24 columns is-multiline'>
-              <div className='column is-6 p-1 mb-0-tablet mb-8'>
+              <div className='column is-6 p-1'>
                 <div className='mb-10 is-relative' style={{ height: 564 }}>
                   <button
                     className='button is-ghost p-0 ml-8 is-absolute is-top-0 is-left-0'
@@ -52,7 +52,7 @@ export default function Project({ projectData }) {
                       />
                     </svg>
                   </button>
-                  <figure class="image is-4by3">
+                  <figure className="image is-4by3">
                     <img src={`/images/${toLowerNoSpace(projectData.name)}/1.png`}/>
                   </figure>
                   <button
@@ -108,7 +108,7 @@ export default function Project({ projectData }) {
                       <span className='has-text-weight-bold is-size-3'>
                         P{projectData.price.toFixed(2).toLocaleString('en-US')}
                       </span>
-                      <span class="is-size-4 ml-4 has-text-grey">{projectData.maxUnits - projectData.takenUnits} units left</span>
+                      <span className="is-size-4 ml-4 has-text-grey">{projectData.maxUnits - projectData.takenUnits} units left</span>
                     </p>
                   </div>
 

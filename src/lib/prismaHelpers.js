@@ -25,7 +25,6 @@ export async function getAllProjectIds() {
         },
     });
   
-    console.log(project);
     return {
       name : project.name,
       designer : project.designer.name,

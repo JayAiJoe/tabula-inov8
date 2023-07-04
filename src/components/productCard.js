@@ -36,7 +36,7 @@ export default function ProductCard({ info }) {
                 <div className="card-image">
                     
 
-                    <figure class="image is-4by3">
+                    <figure className="image is-4by3">
                     <img src={`/images/${toLowerNoSpace(info.name)}/1.png`}/>
                     </figure>
                     

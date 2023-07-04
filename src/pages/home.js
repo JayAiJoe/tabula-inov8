@@ -1,6 +1,22 @@
 import Layout, { siteTitle } from '../components/layout';
 import CarouselCard from '../components/carouselCard';
+import prisma from '../lib/prisma';
 
+
+export async function getStaticProps() {
+    const products = await prisma.project.findMany({
+      include: {
+        designer: {
+          select: { name: true },
+        },
+      },
+    });
+  
+    return {
+      props: { products: JSON.parse(JSON.stringify(products)) },
+      revalidate: 30,
+    };
+  }
 
 export default function Home({ products }) {
   return (
