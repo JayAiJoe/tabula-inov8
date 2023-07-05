@@ -1,7 +1,4 @@
 import { getAllProjectIds, getProjectData } from '../../lib/prismaHelpers';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import Image from 'next/image';
 import OptionSet from '../../components/optionSet';
 import { toLowerNoSpace } from '../../lib/utils';
 import ProjectImageSmall from '../../components/projectImageSmall';

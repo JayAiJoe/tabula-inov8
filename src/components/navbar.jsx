@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const Navbar = () => {
     return(
@@ -45,7 +46,7 @@ const Navbar = () => {
         </div>
     </div>
       
-      <a className="navbar-item mr-auto" href="#">Discover</a>
+      <Link className="navbar-item mr-auto" href="/projectUpload">Designer</Link>
     </div>
     <div className="navbar-end">
 
@@ -79,7 +80,7 @@ const Navbar = () => {
     </div>
     <input className="input mb-10 has-background-light" style={{border: 'none'}} type="search" placeholder="Search"/><ul className="mb-0 is-size-4"><li className="mb-8"><a className="has-text-dark has-text-weight-semibold is-size-4" href="#">Home</a></li>
     <li className="mb-8"><a className="has-text-dark has-text-weight-semibold is-size-4" href="#">Shop</a></li>
-    <li className="mb-8"><a className="has-text-dark has-text-weight-semibold is-size-4" href="#">Discover</a></li>
+    <li className="mb-8"><Link className="has-text-dark has-text-weight-semibold is-size-4" href="/projectUpload">Designer</Link></li>
     <li><a className="has-text-dark has-text-weight-semibold is-size-4" href="#">Brand</a></li>
     </ul></nav></div>
 </section>
