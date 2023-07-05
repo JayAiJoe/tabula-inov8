@@ -1,4 +1,4 @@
-import Layout, { siteTitle } from '../components/layout';
+import Layout from '../components/layout';
 import CarouselCard from '../components/carouselCard';
 import prisma from '../lib/prisma';
 

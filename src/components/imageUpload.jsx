@@ -2,14 +2,14 @@ import React from "react";
 
 const ImageUpload = () => {
     return (
-        <div class="file">
-        <label class="file-label">
-            <input class="file-input" type="file" name="resume"/>
-            <span class="file-cta">
-            <span class="file-icon">
-                <i class="fas fa-upload"></i>
+        <div className="file">
+        <label className="file-label">
+            <input className="file-input" type="file" name="resume"/>
+            <span className="file-cta">
+            <span className="file-icon">
+                <i className="fas fa-upload"></i>
             </span>
-            <span class="file-label">
+            <span className="file-label">
                 Choose a file…
             </span>
             </span>

@@ -103,7 +103,7 @@ export default function Project({ projectData }) {
                     </div>
                     <p className='mb-8 is-inline-block'>
                       <span className='has-text-weight-bold is-size-3'>
-                        P{projectData.price.toFixed(2).toLocaleString('en-US')}
+                        P{projectData.price.toFixed(2)}
                       </span>
                       <span className="is-size-4 ml-4 has-text-grey">{projectData.maxUnits - projectData.takenUnits} units left</span>
                     </p>

@@ -4,7 +4,7 @@ import Link from "next/link";
 const Navbar = () => {
     return(
         <>
-            <section className="is-relative has-background-light is-clipped"><nav className="navbar has-background-white" style={{zIndex: 100,borderBottom: '1px solid #CFD5E2'}}>
+            <section className="is-relative has-background-white is-clipped"><nav className="navbar has-background-white" style={{zIndex: 100,borderBottom: '1px solid #CFD5E2'}}>
                 <div className="navbar-brand is-align-items-center">
   
                     <a className="pl-8 navbar-item">
@@ -20,7 +20,7 @@ const Navbar = () => {
     <div className="navbar-start" style={{width: '100%'}}>
       <div className="mr-10 pl-8 pr-6 is-hidden-touch-only is-hidden-desktop-only is-hidden-widescreen-only is-flex-fullhd has-background-white is-align-items-center" style={{borderRadius: '6px'}}>
         </div>
-      <a className="navbar-item ml-auto" href="#">Home</a>
+      <Link className="navbar-item ml-auto" href="/">Home</Link>
       
       <div className="navbar-item has-dropdown is-hoverable">
         <a className="navbar-link" href="#">

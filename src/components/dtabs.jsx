@@ -8,7 +8,7 @@ const Tabs = () => {
 
     return (
         <>
-            <div class="tabs">
+            <div className="tabs">
                 <ul>
                     <li className={activeTab === "tab1" ? "is-active has-text-white" : "has-text-grey"} onClick={() => setActiveTab("tab1")}>Tab 1</li>
                     <li className={activeTab === "tab2" ? "is-active has-text-white" : "has-text-grey"} onClick={() => setActiveTab("tab2")}>Tab 2</li>

@@ -46,7 +46,7 @@ export default function ProjectUpload({ }) {
 
                   <figure className="image is-4by3">
                     <img src='https://bulma.io/images/placeholders/256x256.png' onClick={()=> openFileInput()}/>
-                    <input class="file-input" type="file" ref={fileref} id="image-input" style={{display:'hidden'}}/>
+                    <input className="file-input" type="file" ref={fileref} id="image-input" style={{display:'hidden'}}/>
                   </figure>
 
                   
@@ -197,9 +197,9 @@ export default function ProjectUpload({ }) {
 
 
                 <Tabs content={[
-                    <div class="field">
-                        <div class="control">
-                            <textarea class="textarea is-medium" placeholder="Enter Project Description Here"></textarea>
+                    <div className="field">
+                        <div className="control">
+                            <textarea className="textarea is-medium" placeholder="Enter Project Description Here"></textarea>
                         </div>
                     </div>,
                     <p className="is-size-4">Community Forum under development</p>,
