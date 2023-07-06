@@ -1,12 +1,12 @@
 import React from 'react';
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en.json'
 import Layout from '../components/layout';
 import CarouselCard from '../components/carouselCard';
 import prisma from '../lib/prisma';
 
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en.json'
 
-TimeAgo.addDefaultLocale(en)
+TimeAgo.addDefaultLocale(en);
 
 export async function getStaticProps() {
     const products = await prisma.project.findMany({
@@ -26,6 +26,7 @@ export async function getStaticProps() {
 
 
 export default function Index({products}) {
+
   return (
     <Layout >
       <CarouselCard products={products} labels={{'title':'Top Group Buys', 'subtitle':'Don\'t miss out! Join the latest popular group buys.'}}/>

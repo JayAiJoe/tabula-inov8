@@ -1,8 +1,7 @@
-import React from 'react';
-import ReactTimeAgo from 'react-time-ago'
 import { parseISO } from 'date-fns';
 import Link from 'next/link';
 import { toLowerNoSpace } from '../lib/utils';
+import ReactTimeAgo from 'react-time-ago'
 
 
 function getStatusText(code) {
@@ -57,7 +56,7 @@ export default function ProductCard({ info }) {
                             value={info.takenUnits} max={info.maxUnits}/>
                         
                         <span>{info.maxUnits - info.takenUnits} units left • 
-                          {/* {<ReactTimeAgo className="ml-2" date={parseISO(info.createdAt)} locale="en-US"/>} */}
+                            {/* {<ReactTimeAgo className="ml-2" date={parseISO(info.createdAt)} locale="en-US"/>} */}
                         </span>
                     </div>
                 </div>

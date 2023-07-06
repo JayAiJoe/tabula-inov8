@@ -3,6 +3,9 @@ import OptionSet from '../components/optionSet';
 import ProjectImageSmall from '../components/projectImageSmall';
 import Tabs from "../components/projectPageTabs";
 import ImageUpload from "../components/imageUpload";
+import { TagsInput } from "react-tag-input-component"; 
+import TagInputField from "../components/tagInputField";
+import { set } from "date-fns";
 
 
 let filler = {'color': ['red', 'green', 'blue']};
@@ -16,6 +19,14 @@ export default function ProjectUpload({ }) {
         ref.current.trigger('click');
     }
 
+    const [optionsList, setOptionsList] = useState(["COLOR"])
+
+    const addOptions = (label) => {
+      if(label.length > 0)
+        setOptionsList([...optionsList, label.toUpperCase()]);
+    }
+
+    const [newOption, setNewOption] = useState('');
 
     return(
         <>
@@ -91,74 +102,79 @@ export default function ProjectUpload({ }) {
                 <div className='pl-20-desktop'>
                   <div className=''>
                     <span className='has-text-grey-dark is-size-4'>{'Your Designer Name'}</span>
-                    <h1 className='title is-1 is-size-2-touch has-leading-2 has-mw-xl mt-2 mb-6 has-text-white'>
-                    {'Project Title'}
-                    </h1>
-                    <div className='mb-8'>
-                      <progress
-                        className='progress is-info'
-                        value={100}
-                        max={50}
-                      />
+                    {/* <h1 className='title is-1 is-size-2-touch has-leading-2 has-mw-xl mt-2 mb-6 has-text-white'>
+                    <input class="input is-large" type="text" placeholder="Project Name"/>
+                    </h1> */}
+                    <div class="field mt-8">
+                      <label class="label is-medium">Project Name</label>
+                      <div class="control">
+                        <input class="input is-medium"  style={{maxHeight:50}} type="text" placeholder="My Keyboard"/>
+                      </div>
                     </div>
-                    <p className='mb-8 is-inline-block'>
-                      <span className='has-text-weight-bold is-size-3'>
-                        P{5000}
-                      </span>
-                      <span className="is-size-4 ml-4 has-text-grey">{'x'} units left</span>
-                    </p>
+                    <div className='mb-8'>
+                      {/* <progress
+                        className='progress is-info'
+                        value={50}
+                        max={100}
+                      /> */}
+                    </div>
+
+                    <div class="columns mb-8" >
+                      <div class="column">
+                          <div class="field">
+                            <label class="label is-medium">Price</label>
+                            <div class="control">
+                              <input class="input is-medium"  style={{maxHeight:50}} type="text" placeholder="10000.00"/>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="column">
+                          <div class="field">
+                            <label class="label is-medium">Max Quantity</label>
+                            <div class="control">
+                              <input class="input is-medium"  style={{maxHeight:50}} type="text" placeholder="300"/>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+
+
                   </div>
 
                   
-                  {Object.keys(filler).map((key) => (
+                  {/* {Object.keys(filler).map((key) => (
                     <OptionSet name={key} options={filler[key]}/>
-                  ))}
+                  ))} */}
+                  
+                  <div>
+                    {optionsList.map((option, index) => (
+                      <TagInputField key={index} label={option}/>
+                    ))}
+                  </div>
 
-                  <div className='mb-14 columns is-multiline'>
-                    <div className='column is-12-touch is-12-desktop is-7-widescreen'>
-                      <button className='button is-fullwidth'>
-                        PLEDGE
-                      </button>
+
+                  <div class="field has-addons" >
+                    <div class="control">
+                      <input class="input is-info" type="text" style={{maxHeight:40}} 
+                        placeholder="More option categories" 
+                        value={newOption}
+                        onChange={e => { setNewOption(e.currentTarget.value);}}
+                      />
                     </div>
-                    <div className='column is-12-touch is-6-desktop is-5-widescreen'>
-                      <button className='button px-6 mr-4'>
-                        <svg
-                          className='-mt-1'
-                          width={27}
-                          height={27}
-                          viewBox='0 0 27 27'
-                          fill='none'
-                          xmlns='http://www.w3.org/2000/svg'
-                        >
-                          <path
-                            d='M13.4993 26.2061L4.70067 16.9253C3.9281 16.1443 3.41815 15.1374 3.24307 14.0471C3.06798 12.9568 3.23664 11.8385 3.72514 10.8505V10.8505C4.09415 10.1046 4.63318 9.45803 5.29779 8.96406C5.96241 8.47008 6.73359 8.14284 7.54782 8.00931C8.36204 7.87578 9.19599 7.93978 9.98095 8.19603C10.7659 8.45228 11.4794 8.89345 12.0627 9.48319L13.4993 10.9358L14.9359 9.48319C15.5192 8.89345 16.2327 8.45228 17.0177 8.19603C17.8026 7.93978 18.6366 7.87578 19.4508 8.00931C20.265 8.14284 21.0362 8.47008 21.7008 8.96406C22.3654 9.45803 22.9045 10.1046 23.2735 10.8505V10.8505C23.762 11.8385 23.9306 12.9568 23.7556 14.0471C23.5805 15.1374 23.0705 16.1443 22.298 16.9253L13.4993 26.2061Z'
-                            stroke='currentColor'
-                            strokeWidth='1.5'
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                          />
-                        </svg>
-                      </button>
-                      <button className='button px-6'>
-                        <svg
-                          className='-mt-1'
-                          width={24}
-                          height={23}
-                          viewBox='0 0 24 23'
-                          fill='none'
-                          xmlns='http://www.w3.org/2000/svg'
-                        >
-                          <path
-                            d='M2.01328 18.9877C2.05682 16.7902 2.71436 12.9275 6.3326 9.87096L6.33277 9.87116L6.33979 9.86454L6.3398 9.86452C6.34682 9.85809 8.64847 7.74859 13.4997 7.74859C13.6702 7.74859 13.8443 7.75111 14.0206 7.757L14.0213 7.75702L14.453 7.76978L14.6331 7.77511V7.59486V3.49068L21.5728 10.5736L14.6331 17.6562V13.6558V13.5186L14.4998 13.4859L14.1812 13.4077C14.1807 13.4075 14.1801 13.4074 14.1792 13.4072M2.01328 18.9877L14.1792 13.4072M2.01328 18.9877C7.16281 11.8391 14.012 13.3662 14.1792 13.4072M2.01328 18.9877L14.1792 13.4072M23.125 10.6961L23.245 10.5736L23.125 10.4512L13.7449 0.877527L13.4449 0.571334V1V6.5473C8.22585 6.54663 5.70981 8.81683 5.54923 8.96832C-0.317573 13.927 0.931279 20.8573 0.946581 20.938L0.946636 20.9383L1.15618 22.0329L1.24364 22.4898L1.47901 22.0885L2.041 21.1305L2.04103 21.1305C4.18034 17.4815 6.71668 15.7763 8.8873 15.0074C10.9246 14.2858 12.6517 14.385 13.4449 14.4935V20.1473V20.576L13.7449 20.2698L23.125 10.6961Z'
-                            fill='currentColor'
-                            stroke='currentColor'
-                            strokeWidth='0.35'
-                          />
-                        </svg>
-                      </button>
+                    <div class="control">
+                      <input class="input has-background-info is-info" type="submit" value="Add" style={{maxHeight:40}} onClick={() => addOptions(newOption)}/>
                     </div>
                   </div>
-                  <div className='is-flex is-align-items-center'>
+
+                  
+                  <div class="field mt-8">
+                      <div class="control">
+                        <button class="button is-fullwidth is-info">Publish</button>
+                      </div>
+                    </div>
+                    
+                 
+                  {/* <div className='is-flex is-align-items-center'>
                     <p className='mb-0 mr-8 has-text-grey has-text-weight-bold'>
                       FOLLOW DESIGNER
                     </p>
@@ -189,7 +205,8 @@ export default function ProjectUpload({ }) {
                         alt=''
                       />
                     </button>
-                  </div>
+                  </div> */}
+
                 </div>
               </div>
             </div>
