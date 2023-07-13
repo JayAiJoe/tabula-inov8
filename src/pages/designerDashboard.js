@@ -1,9 +1,11 @@
 import React from 'react';
 import Layout from '../components/layout';
-import CarouselCard from '../components/carouselCard';
 import prisma from '../lib/prisma';
 import DashboardCarousel from '../components/dashboardCarousel';
-import FillerProductCard from '../components/filleProductCard';
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en.json'
+
+TimeAgo.addDefaultLocale(en);
 
 
 export async function getStaticProps() {
