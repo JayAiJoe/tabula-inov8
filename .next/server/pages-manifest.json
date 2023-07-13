@@ -1,10 +1,6 @@
 {
-  "/_error": "pages/_error.js",
   "/_app": "pages/_app.js",
-  "/projectUpload": "pages/projectUpload.html",
-  "/": "pages/index.js",
-  "/designerDashboard": "pages/designerDashboard.js",
-  "/projects/[id]": "pages/projects/[id].js",
+  "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/404": "pages/404.html"
+  "/": "pages/index.js"
 }

@@ -12,3 +12,9 @@ export function isNumberKey(key){
 
 export const DANGER_THRESHOLD = 15;
 export const PLACEHOLDER_IMAGE = 'https://icon-library.com/images/placeholder-image-icon/placeholder-image-icon-21.jpg'
+
+export const STATUS = {
+    0 : "Interest Check",
+    1 : "In Production",
+    2 : "Pending",
+}

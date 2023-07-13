@@ -2,19 +2,8 @@ import { parseISO } from 'date-fns';
 import Link from 'next/link';
 import { PLACEHOLDER_IMAGE, toLowerNoSpace } from '../lib/utils';
 import ReactTimeAgo from 'react-time-ago'
-import { DANGER_THRESHOLD } from '../lib/utils';
+import { DANGER_THRESHOLD, STATUS } from '../lib/utils';
 
-
-function getStatusText(code) {
-    switch(code) {
-      case 0:
-        return "Interest Check";
-    case 1:
-        return "In Production";
-    case 2:
-        return "Pending";
-    }
-  }
 
 function getStatusTag(code) {
     switch(code) {
@@ -72,7 +61,7 @@ export default function ProductCard({ info }) {
                         </span>
                     </div>
                 </div>
-                <div className={getStatusTag(info.status)} style={{position:"absolute",top:'2%',right:'2%'}}>{getStatusText(info.status)}</div>
+                <div className={getStatusTag(info.status)} style={{position:"absolute",top:'2%',right:'2%'}}>{STATUS[info.status]}</div>
             </div>
         </Link>
     );
