@@ -2,7 +2,8 @@ import { getAllProjectIds, getProjectData } from '../../lib/prismaHelpers';
 import OptionSet from '../../components/optionSet';
 import { toLowerNoSpace } from '../../lib/utils';
 import ProjectImageSmall from '../../components/projectImageSmall';
-
+import Tabs from '../../components/projectPageTabs';
+import { DANGER_THRESHOLD } from '../../lib/utils';
 
 export async function getStaticProps({ params }) {
     const projectData = await getProjectData(params.id);
@@ -22,7 +23,12 @@ export async function getStaticPaths() {
   }
 
 
+
+
 export default function Project({ projectData }) {
+
+
+
     return (
       <>
         <section className='section is-clipped'>
@@ -50,7 +56,12 @@ export default function Project({ projectData }) {
                     </svg>
                   </button>
                   <figure className="image is-4by3">
-                    <img src={`/images/${toLowerNoSpace(projectData.name)}/1.png`}/>
+                    <img src={`/images/${toLowerNoSpace(projectData.name)}/1.png`}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = PLACEHOLDER_IMAGE;
+                      }}
+                    />
                   </figure>
                   <button
                     className='button is-ghost p-0 mr-8 is-absolute is-top-0 is-right-0'
@@ -90,22 +101,25 @@ export default function Project({ projectData }) {
               <div className='column is-6'>
                 <div className='pl-20-desktop'>
                   <div className=''>
-                    <span className='has-text-grey-dark is-size-4'>{projectData.designer}</span>
-                    <h1 className='title is-1 is-size-2-touch has-leading-2 has-mw-xl mt-2 mb-6 has-text-white'>
+                    <span className='has-text-grey is-size-4'>{projectData.designer}</span>
+                    <h1 className='title is-1 is-size-2-touch has-leading-2 has-mw-xl mt-2 mb-2 has-text-white'>
                     {projectData.name}
                     </h1>
-                    <div className='mb-8'>
+                    {/* <div className='mb-8'>
                       <progress
                         className='progress is-info'
                         value={projectData.takenUnits}
                         max={projectData.maxUnits}
                       />
-                    </div>
-                    <p className='mb-8 is-inline-block'>
+                    </div> */}
+                    <p className='mb-4 is-inline-block'>
                       <span className='has-text-weight-bold is-size-3'>
                         P{projectData.price.toFixed(2)}
                       </span>
-                      <span className="is-size-4 ml-4 has-text-grey">{projectData.maxUnits - projectData.takenUnits} units left</span>
+                      <span className={(projectData.maxUnits - projectData.takenUnits < DANGER_THRESHOLD 
+                      ? "is-size-3 ml-4 has-text-danger"
+                      : "is-size-3 ml-4 has-text-grey") }
+                      >{projectData.maxUnits - projectData.takenUnits} units left</span>
                     </p>
                   </div>
 
@@ -113,10 +127,24 @@ export default function Project({ projectData }) {
                     <OptionSet name={key} options={projectData.options[key]}/>
                   ))}
 
+                  
+                  
+
+                  <div className="field mt-12">
+                    <span class="control">
+                      <label class="is-checkbox is-rounded">
+                        <input type="checkbox"/>
+                        <span className='ml-4 is-size-5'>Include product insurance: P{(projectData.price * 0.03).toFixed(2)}</span>
+                      </label>
+                    </span>
+                  </div>
+
+                  
+
                   <div className='mb-14 columns is-multiline'>
                     <div className='column is-12-touch is-12-desktop is-7-widescreen'>
                       <button className='button is-fullwidth'>
-                        PLEDGE
+                        PURCHASE
                       </button>
                     </div>
                     <div className='column is-12-touch is-6-desktop is-5-widescreen'>
@@ -192,28 +220,13 @@ export default function Project({ projectData }) {
                 </div>
               </div>
             </div>
-            <div>
-              <div className='tabs is-large'>
-                <ul className=''>
-                  <li className='is-active'>
-                    <a href='' className='has-text-white'>
-                      Description
-                    </a>
-                  </li>
-                  <li>
-                    <a className='has-text-grey'>Community</a>
-                  </li>
-                  <li>
-                    <a className='has-text-grey'>Status</a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <p className='is-size-5'>
-                  {projectData.description}
-                </p>
-              </div>
-            </div>
+              <Tabs content={[
+                      <p className="is-size-5">{projectData.description}</p>,
+                      <p className="is-size-4">Community Forum under development</p>,
+                      <p className="is-size-4">Project Status Updates under development</p>
+                  ]
+
+              }/>
           </div>
         </section>
       </>

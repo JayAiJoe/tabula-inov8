@@ -5,7 +5,7 @@ import Footer from '../components/footer';
 export default function App({ Component, pageProps }) {
     return(
         <>
-            <Navbar/>
+            <Navbar style={{zIndex:100}}/>
             <Component {...pageProps} style={{zIndex: 1}} />
             <Footer/>
         </>

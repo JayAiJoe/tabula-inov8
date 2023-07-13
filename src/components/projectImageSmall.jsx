@@ -1,4 +1,5 @@
 import React from "react";
+import { PLACEHOLDER_IMAGE } from "../lib/utils";
 
 const  ProjectImageSmall = ({name, index}) => {
     return(
@@ -10,6 +11,10 @@ const  ProjectImageSmall = ({name, index}) => {
                         className='image is-cover'
                         style={{ height: 128, width: '100%' }}
                         src={`/images/${name}/${index}.png`}
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = PLACEHOLDER_IMAGE;
+                        }}
                         alt='Product Image'
                     />
                 }
@@ -18,7 +23,11 @@ const  ProjectImageSmall = ({name, index}) => {
                     <img
                         className='image is-cover'
                         style={{ height: 128, width: '100%' }}
-                        src='https://bulma.io/images/placeholders/256x256.png'
+                        src={PLACEHOLDER_IMAGE}
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = PLACEHOLDER_IMAGE;
+                        }}
                         alt='Product Image'
                     />
                 }

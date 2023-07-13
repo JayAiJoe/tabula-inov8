@@ -1,7 +1,8 @@
 import { parseISO } from 'date-fns';
 import Link from 'next/link';
-import { toLowerNoSpace } from '../lib/utils';
+import { PLACEHOLDER_IMAGE, toLowerNoSpace } from '../lib/utils';
 import ReactTimeAgo from 'react-time-ago'
+import { DANGER_THRESHOLD } from '../lib/utils';
 
 
 function getStatusText(code) {
@@ -37,26 +38,37 @@ export default function ProductCard({ info }) {
                     
 
                     <figure className="image is-4by3">
-                    <img src={`/images/${toLowerNoSpace(info.name)}/1.png`}/>
+                    <img src={`/images/${toLowerNoSpace(info.name)}/1.png`}
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = PLACEHOLDER_IMAGE;
+                        }}
+                    />
                     </figure>
                     
                 </div>
                 <div className="card-content">
                 
-                    <div className="media">
-                    <div className="media-content">
-                        <p className="title is-4">{info.name}</p>
-                        <p className="subtitle is-6">{info.designer.name}</p>
-                        
-                    </div>
+                    <div className="media mb-2 ">
+                        <div className="media-content">
+                            <p className="title is-4 mb-0">{info.name}</p>
+                            <p className="subtitle is-5">{info.designer.name}</p>
+                            
+                        </div>
                     </div>
                     <div className="content">
-                        <progress 
+                        {/* <progress 
                             className="progress is-info"
-                            value={info.takenUnits} max={info.maxUnits}/>
+                            value={info.takenUnits} max={info.maxUnits}/> */}
                         
-                        <span>{info.maxUnits - info.takenUnits} units left • 
-                            {/* {<ReactTimeAgo className="ml-2" date={parseISO(info.createdAt)} locale="en-US"/>} */}
+
+                        <span className='mr-2'>
+                            <span className={(info.maxUnits - info.takenUnits < DANGER_THRESHOLD 
+                            ? "has-text-danger"
+                            : "") }
+                            >{info.maxUnits - info.takenUnits} units left </span>
+                            • {<ReactTimeAgo className="ml-2" date={parseISO(info.createdAt)} locale="en-US"/>}
+
                         </span>
                     </div>
                 </div>

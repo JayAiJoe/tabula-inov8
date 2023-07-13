@@ -6,6 +6,7 @@ import ImageUpload from "../components/imageUpload";
 import { TagsInput } from "react-tag-input-component"; 
 import TagInputField from "../components/tagInputField";
 import { set } from "date-fns";
+import { PLACEHOLDER_IMAGE, isNumberKey } from "../lib/utils";
 
 
 let filler = {'color': ['red', 'green', 'blue']};
@@ -56,7 +57,7 @@ export default function ProjectUpload({ }) {
                   </button>
 
                   <figure className="image is-4by3">
-                    <img src='https://bulma.io/images/placeholders/256x256.png' onClick={()=> openFileInput()}/>
+                    <img src={PLACEHOLDER_IMAGE} onClick={()=> openFileInput()}/>
                     <input className="file-input" type="file" ref={fileref} id="image-input" style={{display:'hidden'}}/>
                   </figure>
 
@@ -67,7 +68,7 @@ export default function ProjectUpload({ }) {
                     href='#'
                   >
                     <svg
-                      xmlns='http://www.w3.org/2000/svg'
+                      xmlns={PLACEHOLDER_IMAGE}
                       width={10}
                       height={18}
                       viewBox='0 0 10 18'
@@ -105,13 +106,13 @@ export default function ProjectUpload({ }) {
                     {/* <h1 className='title is-1 is-size-2-touch has-leading-2 has-mw-xl mt-2 mb-6 has-text-white'>
                     <input class="input is-large" type="text" placeholder="Project Name"/>
                     </h1> */}
-                    <div class="field mt-8">
+                    <div class="field mt-2">
                       <label class="label is-medium">Project Name</label>
                       <div class="control">
-                        <input class="input is-medium"  style={{maxHeight:50}} type="text" placeholder="My Keyboard"/>
+                        <input class="input is-medium"  style={{maxHeight:40}} type="text" placeholder="My Keyboard"/>
                       </div>
                     </div>
-                    <div className='mb-8'>
+                    <div className='mb-0'>
                       {/* <progress
                         className='progress is-info'
                         value={50}
@@ -119,12 +120,14 @@ export default function ProjectUpload({ }) {
                       /> */}
                     </div>
 
-                    <div class="columns mb-8" >
+                    <div class="columns mb-2" >
                       <div class="column">
                           <div class="field">
                             <label class="label is-medium">Price</label>
                             <div class="control">
-                              <input class="input is-medium"  style={{maxHeight:50}} type="text" placeholder="10000.00"/>
+                              <input class="input is-medium"  style={{maxHeight:40}} type="text" placeholder="10000.00"
+                                onKeyDown={(event) => { if (!isNumberKey(event.key)) {event.preventDefault();}}}
+                              />
                             </div>
                           </div>
                       </div>
@@ -132,7 +135,8 @@ export default function ProjectUpload({ }) {
                           <div class="field">
                             <label class="label is-medium">Max Quantity</label>
                             <div class="control">
-                              <input class="input is-medium"  style={{maxHeight:50}} type="text" placeholder="300"/>
+                              <input class="input is-medium"  style={{maxHeight:40}} type="text" placeholder="300"
+                              onKeyDown={(event) => { if (!isNumberKey(event.key)) {event.preventDefault();}}}/>
                             </div>
                           </div>
                       </div>
@@ -162,7 +166,14 @@ export default function ProjectUpload({ }) {
                       />
                     </div>
                     <div class="control">
-                      <input class="input has-background-info is-info" type="submit" value="Add" style={{maxHeight:40}} onClick={() => addOptions(newOption)}/>
+                      <input class="input has-background-info is-info has-text-white" type="submit" value="Add" style={{maxHeight:40}} onClick={() => addOptions(newOption)}/>
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <label class="label is-medium">Personal Link</label>
+                    <div class="control">
+                      <input class="input"  style={{maxHeight:40}} type="text" placeholder="Link to social media or personal website"/>
                     </div>
                   </div>
 

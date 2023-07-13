@@ -1,18 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 import OptionButton from "./optionButton";
 
 const OptionSet = ({name, options}) => {
+    const [activeOption, setActiveOption] = useState("");
     return(
-        <div className='mb-12'>
-                    <span className='mb-4 is-block has-text-grey has-text-weight-bold'>
+        <div className='mb-4'>
+                    <span className='mb-2 is-block has-text-grey has-text-weight-bold'>
                       {name.toUpperCase()}
                     </span>
                     <div className='columns is-mobile is-multiline'>
+                        
                         {options.map((option) => (
-                            <OptionButton value={option}/>
+                            <OptionButton value={option} activeOption={activeOption} setActiveOption={setActiveOption}/>
                         ))}
                     </div>
-                  </div>
+        </div> 
 
     );
 }
