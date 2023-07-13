@@ -5,7 +5,7 @@ const Navbar = () => {
     return(
         <>
             <section className="is-relative has-background-white is-clipped"><nav className="navbar has-background-white" style={{zIndex: 100,borderBottom: '1px solid #CFD5E2'}}>
-                <div className="navbar-brand is-align-items-center">
+                <div className="navbar-brand is-align-items-center" style={{minWidth:210}}>
   
                     <a className="pl-8 navbar-item" href="/">
 
@@ -18,8 +18,8 @@ const Navbar = () => {
   </div>
   <div className="navbar-menu ml-10 is-align-items-center">
     <div className="navbar-start" style={{width: '100%'}}>
-      <div className="mr-10 pl-8 pr-6 is-hidden-touch-only is-hidden-desktop-only is-hidden-widescreen-only is-flex-fullhd has-background-white is-align-items-center" style={{borderRadius: '6px'}}>
-        </div>
+      {/* <div className="mr-10 pl-8 pr-6 is-hidden-touch-only is-hidden-desktop-only is-hidden-widescreen-only is-flex-fullhd has-background-white is-align-items-center" style={{borderRadius: '6px'}}>
+        </div> */}
       <Link className="navbar-item ml-auto" href="/">Home</Link>
       <Link className="navbar-item" href="/">Shop</Link>
       
@@ -48,9 +48,9 @@ const Navbar = () => {
     </div> */}
       
       <Link className="navbar-item" href="/projectUpload">New Project</Link>
-      <Link className="navbar-item mr-auto" href="/projectUpload">Dashboard</Link>
+      <Link className="navbar-item mr-auto" href="/designerDashboard">Dashboard</Link>
     </div>
-    <div className="navbar-end">
+    <div className="navbar-end" style={{minWidth:210}}>
 
       {/* <a className="navbar-item is-flex is-align-items-center" href="#">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="mr-3"><path d="M20 7v10H4V7h16m0-2H4c-1.1 0-1.99.9-1.99 2L2 17c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-9 3h2v2h-2zm0 3h2v2h-2zM8 8h2v2H8zm0 3h2v2H8zm-3 0h2v2H5zm0-3h2v2H5zm3 6h8v2H8zm6-3h2v2h-2zm0-3h2v2h-2zm3 3h2v2h-2zm0-3h2v2h-2z"></path></svg><span className="is-inline-flex is-align-items-center is-justify-content-center has-background-white has-text-weight-bold" style={{width: '24px', height: '24px', borderRadius: '50% !important'}}>3</span>
