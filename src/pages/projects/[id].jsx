@@ -229,7 +229,7 @@ export default function Project({ projectData, session }) {
               </div>
             </div>
               <Tabs content={[
-                      <p className="is-size-4">{projectData.description}</p>,
+                      <p className="is-size-5">{projectData.description}</p>,
                       <MessageSection messageType="comment" postable={true} messages={projectData.comments}/>,
                       <MessageSection messageType="update" postable={true} messages={projectData.updates}/>
                   ]
