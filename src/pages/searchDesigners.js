@@ -6,6 +6,7 @@ import DesignerCard from "../components/designerCard";
 import useSWR from 'swr';
 import { LoadingAnimation } from "../components/loadingAnimation";
 import { withSessionSsr } from "../lib/config/withSession";
+import { defaultUser } from "../lib/utils";
 
 
 
