@@ -36,8 +36,10 @@ import { withSessionSsr } from '../../lib/config/withSession';
     async ({req, res}) => {
         const user = req.session.user;
 
-        let texts = req.url.split("/");
+        let texts = req.url.split(/\/|=/);
         const id = texts[texts.length-1];
+
+        console.log("Product url", texts);
 
         const data = await getProjectData(id);
   
@@ -128,7 +130,7 @@ export default function Project({ projectData, session }) {
                 
                 {
                   [1,2,3,4].map((item,index)=>{
-                    return <ProjectImageSmall name={toLowerNoSpace(projectData.name)} index={item} />
+                    return <ProjectImageSmall name={toLowerNoSpace(projectData.name)} index={item} key={index}/>
                   })
                 }
                     
@@ -160,8 +162,8 @@ export default function Project({ projectData, session }) {
                   
                   {projectData.status == 2 && 
                     <div className="field mt-8">
-                      <span class="control">
-                        <label class="is-checkbox is-rounded">
+                      <span className="control">
+                        <label className="is-checkbox is-rounded">
                           <input type="checkbox"/>
                           
                           <span className='ml-4 is-size-5'>Include product insurance: P{(projectData.price * 0.03).toFixed(2)}.  <span className='has-text-grey' style={{textDecoration:"underline"}}>Learn more.</span></span>

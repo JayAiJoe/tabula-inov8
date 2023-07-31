@@ -11,8 +11,8 @@ const OptionSet = ({name, options}) => {
                     </span>
                     <div className='columns is-mobile is-multiline'>
                         
-                        {options.map((option) => (
-                            <OptionButton value={option.value} activeOption={activeOption} setActiveOption={setActiveOption}/>
+                        {options.map((option, index) => (
+                            <OptionButton value={option.value} key={index} activeOption={activeOption} setActiveOption={setActiveOption}/>
                         ))}
                     </div>
         </div> 

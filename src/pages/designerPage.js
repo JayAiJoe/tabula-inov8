@@ -69,10 +69,10 @@ export default function DesignerPage({session, live, checks, drafts, completed})
         <Layout session={session}>
             <div className="mt-8">
             <div className="box ml-24 mr-24" style={{borderRadius:32, backgroundColor:"#2B3239", borderColor:"#54606D", borderWidth:4}}>
-                <div className='columns has-text-grey '>
+                <div className='columns has-text-grey is-vcentered'>
                     <div className='column is-8'>
                         <p className='is-size-3 mb-6' style={{textDecoration:"underline"}}>{session.username}<FontAwesomeIcon icon={faPenToSquare} className='ml-2'/></p>
-                        <p>{FILLERTEXT}</p>
+                        <p style={{whiteSpace:"pre-line"}}>{FILLERTEXT}</p>
                     </div>
                     <div className='column is-4'>
                         <p className='is-size-5 mb-2 has-text-white'>Designer Details</p>

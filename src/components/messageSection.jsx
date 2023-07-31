@@ -20,7 +20,7 @@ const MessageSection = ({messageType, messages = [], postable = false}) => {
             }
 
             {messages.map((message, key) => (
-                <div className="box has-text-white"  style={{background:"#2B3239", borderColor:"#54606D", borderWidth:2, borderRadius:0}}>
+                <div className="box has-text-white"  key={key} style={{background:"#2B3239", borderColor:"#54606D", borderWidth:2, borderRadius:0}}>
                     <div className="level">
                         <p className="level-left is-size-4" style={{fontWeight:600}}>{message.user.username}</p>
                         <p className="level-right has-text-grey mb-auto" style={{fontWeight:600}}>
