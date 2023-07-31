@@ -9,7 +9,7 @@ const CarouselCard = ({labels, products}) => {
         <div className="card-content">
             <p className="title is-3 has-text-white ml-20">{labels.title}</p>
             <p className="subtitle is-5 has-text-grey-light ml-20">{labels.subtitle}</p>
-            <Carousel show={5} slide={1} leftArrow={<CarouselButton direction={-1}/>} rightArrow={<CarouselButton direction={1}/>}>
+            <Carousel show={4} slide={1} leftArrow={<CarouselButton direction={-1}/>} rightArrow={<CarouselButton direction={1}/>}>
                 {products.map((product, index) => (
                   <ProductCard info={product} key={index}/>
                 ))}

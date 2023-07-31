@@ -1,36 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '../components/layout';
 import CarouselCard from '../components/carouselCard';
 import prisma from '../lib/prisma';
+import ProjectCard from '../components/projectCard';
+// import TimeAgo from 'javascript-time-ago'
+// import en from 'javascript-time-ago/locale/en.json'
+import SearchBar from '../components/searchBar';
+import Pagination from '../components/Pagination';
+import { useRouter } from 'next/navigation'
+import { withSessionSsr } from '../lib/config/withSession';
+import { defaultUser } from '../lib/utils';
 
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en.json'
+// TimeAgo.addDefaultLocale(en);
 
-TimeAgo.addDefaultLocale(en);
+export const getServerSideProps = withSessionSsr(
+  async ({req, res}) => {
+      const user = req.session.user;
 
-export async function getStaticProps() {
-    const products = await prisma.project.findMany({
-      include: {
-        designer: {
-          select: { name: true },
-        },
-      },
-    });
-  
-    return {
-      props: { products: JSON.parse(JSON.stringify(products)) },
-      revalidate: 30,
-    };
+      const allProducts = await prisma.GroupBuy.findMany({
+        include: {
+          designer: {select: { username: true },},
+        }
+      });
+
+      if(!user) {
+          return {
+            props: { session: defaultUser, products: JSON.parse(JSON.stringify(allProducts))}
+          }
+      }
+
+      return {
+          props: { session: user, products: JSON.parse(JSON.stringify(allProducts))}
+      }
   }
+);
 
 
+export default function Index({session, products}) {
 
-export default function Index({products}) {
+  const [searchWord, setSearchWord] = useState('');
+  const router = useRouter();
+
+  const handleChange = (event) => {
+    setSearchWord(event.target.value);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+        const encodedQuery = encodeURI(searchWord);
+        router.push(`/search?q=${encodedQuery}`);
+    }
+  };
 
   return (
-    <Layout >
-      <CarouselCard products={products} labels={{'title':'Top Group Buys', 'subtitle':'Don\'t miss out! Join the latest popular group buys.'}}/>
-      <CarouselCard products={products} labels={{'title':'Trending Designers', 'subtitle':'Discover new keyboards from upcoming designers.'}}/>
+    <Layout session={session} >
+      <div className="mt-8">
+        <SearchBar word={searchWord} typeHandler={handleChange} enterHandler={handleKeyDown}/>
+        <div className="mb-20 columns is-multiline" style={{ marginLeft: 10, marginRight: 10}}>
+        {products.map((product, index) => (
+          <ProjectCard info={product} key={index}/>
+        ))}
+        </div>
+        {/* <Pagination/> */}
+        </div>
     </Layout>
   );
 }

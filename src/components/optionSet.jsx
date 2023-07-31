@@ -3,6 +3,7 @@ import OptionButton from "./optionButton";
 
 const OptionSet = ({name, options}) => {
     const [activeOption, setActiveOption] = useState("");
+
     return(
         <div className='mb-4'>
                     <span className='mb-2 is-block has-text-grey has-text-weight-bold'>
@@ -11,7 +12,7 @@ const OptionSet = ({name, options}) => {
                     <div className='columns is-mobile is-multiline'>
                         
                         {options.map((option) => (
-                            <OptionButton value={option} activeOption={activeOption} setActiveOption={setActiveOption}/>
+                            <OptionButton value={option.value} activeOption={activeOption} setActiveOption={setActiveOption}/>
                         ))}
                     </div>
         </div> 

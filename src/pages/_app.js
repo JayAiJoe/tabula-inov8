@@ -1,13 +1,14 @@
 import '../styles/globals.scss';
-import Navbar from '../components/navbar.jsx'
-import Footer from '../components/footer';
+
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en.json'
+
+TimeAgo.addDefaultLocale(en);
 
 export default function App({ Component, pageProps }) {
     return(
-        <>
-            <Navbar style={{zIndex:100}}/>
+        <div>
             <Component {...pageProps} style={{zIndex: 1}} />
-            <Footer/>
-        </>
+        </div>
     );
   }

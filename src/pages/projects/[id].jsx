@@ -1,36 +1,75 @@
-import { getAllProjectIds, getProjectData } from '../../lib/prismaHelpers';
+import { getProjectData } from '../../lib/prismaHelpers';
 import OptionSet from '../../components/optionSet';
 import { toLowerNoSpace } from '../../lib/utils';
 import ProjectImageSmall from '../../components/projectImageSmall';
 import Tabs from '../../components/projectPageTabs';
 import { DANGER_THRESHOLD } from '../../lib/utils';
-
-export async function getStaticProps({ params }) {
-    const projectData = await getProjectData(params.id);
-    return {
-      props: {
-        projectData
-      }
-    };
-  }
-
-export async function getStaticPaths() {
-    const paths = await getAllProjectIds();
-    return {
-      paths,
-      fallback: false,
-    };
-  }
+import FollowLinks from '../../components/followLinks';
+import { formatDate } from '../../lib/utils';
+import MessageSection from '../../components/messageSection';
+import Layout from '../../components/layout';
+import { defaultUser } from '../../lib/utils';
+import { withSessionSsr } from '../../lib/config/withSession';
 
 
 
+// export async function getStaticPaths() {
+//     const paths = await getAllProjectIds();
+//     return {
+//       paths,
+//       fallback: false,
+//     };
+//   }
 
-export default function Project({ projectData }) {
+//   export async function getStaticProps({ params }) {
+//     const data = await getProjectData(params.id);
+//     return {
+//       props: {
+//         projectData : data,
+//         session : defaultUser,
+//       }
+//     };
+//   }
 
 
+  export const getServerSideProps = withSessionSsr(
+    async ({req, res}) => {
+        const user = req.session.user;
 
+        let texts = req.url.split("/");
+        const id = texts[texts.length-1];
+
+        const data = await getProjectData(id);
+  
+        if(!user) {
+            return {
+              props: {
+                projectData : data,
+                session : defaultUser,
+              }
+            }
+        }
+  
+        return {
+          props: {
+            projectData : data,
+            session : user,
+          }
+        }
+    }
+  );
+
+
+  
+
+
+export default function Project({ projectData, session }) {
+
+    const dateString = "2023-08-04T00:49:49+0000";
+
+    console.log(projectData.updates);
     return (
-      <>
+      <Layout session={session} >
         <section className='section is-clipped'>
           <div className='container'>
             <div className='mb-24 columns is-multiline'>
@@ -94,57 +133,52 @@ export default function Project({ projectData }) {
                   })
                 }
                     
-                  
-
                 </div>
+
+                
+                
+
+
               </div>
               <div className='column is-6'>
                 <div className='pl-20-desktop'>
-                  <div className=''>
-                    <span className='has-text-grey is-size-4'>{projectData.designer}</span>
-                    <h1 className='title is-1 is-size-2-touch has-leading-2 has-mw-xl mt-2 mb-2 has-text-white'>
-                    {projectData.name}
-                    </h1>
-                    {/* <div className='mb-8'>
-                      <progress
-                        className='progress is-info'
-                        value={projectData.takenUnits}
-                        max={projectData.maxUnits}
-                      />
-                    </div> */}
-                    <p className='mb-4 is-inline-block'>
-                      <span className='has-text-weight-bold is-size-3'>
-                        P{projectData.price.toFixed(2)}
+                  <div className='mb-8'>
+                    <div className='has-text-grey is-size-4'>{projectData.designer}</div>
+                    <div className='has-text-white is-size-1' style={{fontWeight:600}}>{projectData.name}</div>
+                    <div className='has-text-white is-size-2' style={{fontWeight:600}}>P{parseFloat(projectData.price.toFixed(2)).toLocaleString()}</div>
+
+                    {projectData.status == 1 && <div className='has-text-grey is-size-4'>{projectData.currentUnits} out of {projectData.maxUnits} people in waitlist</div>}
+                    {projectData.status == 2 && <div className='has-text-grey is-size-4'>{projectData.maxUnits - projectData.currentUnits} units left</div>}
+
+                    
+                  </div>
+
+                  {projectData.components.map((component) => (
+                    <OptionSet name={component.name} options={component.options}/>
+                  ))} 
+
+                  
+                  
+                  {projectData.status == 2 && 
+                    <div className="field mt-8">
+                      <span class="control">
+                        <label class="is-checkbox is-rounded">
+                          <input type="checkbox"/>
+                          
+                          <span className='ml-4 is-size-5'>Include product insurance: P{(projectData.price * 0.03).toFixed(2)}.  <span className='has-text-grey' style={{textDecoration:"underline"}}>Learn more.</span></span>
+                          
+                          </label>
                       </span>
-                      <span className={(projectData.maxUnits - projectData.takenUnits < DANGER_THRESHOLD 
-                      ? "is-size-3 ml-4 has-text-danger"
-                      : "is-size-3 ml-4 has-text-grey") }
-                      >{projectData.maxUnits - projectData.takenUnits} units left</span>
-                    </p>
-                  </div>
-
-                  {Object.keys(projectData.options).map((key) => (
-                    <OptionSet name={key} options={projectData.options[key]}/>
-                  ))}
+                    </div>
+                  }
 
                   
-                  
-
-                  <div className="field mt-12">
-                    <span class="control">
-                      <label class="is-checkbox is-rounded">
-                        <input type="checkbox"/>
-                        <span className='ml-4 is-size-5'>Include product insurance: P{(projectData.price * 0.03).toFixed(2)}</span>
-                      </label>
-                    </span>
-                  </div>
-
-                  
-
-                  <div className='mb-14 columns is-multiline'>
+                  {projectData.status != 3 && 
+                  <div className='mb-8 columns is-multiline'>
                     <div className='column is-12-touch is-12-desktop is-7-widescreen'>
-                      <button className='button is-fullwidth'>
-                        PURCHASE
+                      <button className='button is-fullwidth is-large'>
+                        {projectData.status == 1 && <span>JOIN THE WAITLIST</span>}
+                        {projectData.status == 2 && <span>PURCHASE</span>}
                       </button>
                     </div>
                     <div className='column is-12-touch is-6-desktop is-5-widescreen'>
@@ -185,57 +219,24 @@ export default function Project({ projectData }) {
                       </button>
                     </div>
                   </div>
-                  <div className='is-flex is-align-items-center'>
-                    <p className='mb-0 mr-8 has-text-grey has-text-weight-bold'>
-                      FOLLOW DESIGNER
-                    </p>
-                    <button
-                      className='mr-1'
-                      style={{ width: 32, height: 32 }}
-                    >
-                      <img
-                        className='image'
-                        src='yofte-assets/buttons/facebook-circle.svg'
-                        alt=''
-                      />
-                    </button>
-                    <button
-                      className='mr-1'
-                      style={{ width: 32, height: 32 }}
-                    >
-                      <img
-                        className='image'
-                        src='yofte-assets/buttons/instagram-circle.svg'
-                        alt=''
-                      />
-                    </button>
-                    <button style={{ width: 32, height: 32 }}>
-                      <img
-                        className='image'
-                        src='yofte-assets/buttons/twitter-circle.svg'
-                        alt=''
-                      />
-                    </button>
-                  </div>
+                  }
+
+                  {projectData.status == 1 && <p className='is-size-3 mb-8' style={{fontWeight:600}}>IC ends: {formatDate(dateString)}</p>}
+                  {projectData.status == 2 && <p className='is-size-3 mb-8' style={{fontWeight:600}}>Group Buy ends: {formatDate(dateString)}</p>}
+                  {projectData.status == 3 && <p className='is-size-3 mb-8' style={{fontWeight:600}}>Group Buy ended: {formatDate(dateString)}</p>}
+                  <FollowLinks designerName={projectData.designer} numFollowers={4267}/>
                 </div>
               </div>
             </div>
               <Tabs content={[
-                      <p className="is-size-5">{projectData.description}</p>,
-                      <p className="is-size-4">Community Forum under development</p>,
-                      <p className="is-size-4">Project Status Updates under development</p>
+                      <p className="is-size-4">{projectData.description}</p>,
+                      <MessageSection messageType="comment" postable={true} messages={projectData.comments}/>,
+                      <MessageSection messageType="update" postable={true} messages={projectData.updates}/>
                   ]
 
               }/>
           </div>
         </section>
-      </>
-
-
-
-      
-
-
-
+      </Layout>
     );
   }

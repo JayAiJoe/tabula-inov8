@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import OptionSet from '../components/optionSet';
 import ProjectImageSmall from '../components/projectImageSmall';
 import Tabs from "../components/projectPageTabs";
@@ -7,12 +7,32 @@ import { TagsInput } from "react-tag-input-component";
 import TagInputField from "../components/tagInputField";
 import { set } from "date-fns";
 import { PLACEHOLDER_IMAGE, isNumberKey } from "../lib/utils";
-
+import MessageSection from "../components/messageSection";
+import Layout from "../components/layout";
+import { withSessionSsr } from "../lib/config/withSession";
+import { defaultUser } from "../lib/utils";
+import StatusPicker from "../components/statusPicker";
 
 let filler = {'color': ['red', 'green', 'blue']};
 
 
-export default function ProjectUpload({ }) {
+export const getServerSideProps = withSessionSsr(
+  async ({req, res}) => {
+      const user = req.session.user;
+
+      if(!user) {
+          return {
+            props: { session: defaultUser}
+          }
+      }
+
+      return {
+          props: { session: user}
+      }
+  }
+);
+
+export default function ProjectUpload({session}) {
 
     const fileref = useRef(null);
 
@@ -30,7 +50,19 @@ export default function ProjectUpload({ }) {
     const [newOption, setNewOption] = useState('');
 
     return(
-        <>
+        <Layout session={session} >
+        <div className="ml-16 mr-16 mt-4">
+          <div className="block"><b>TABULA GUIDELINES:</b></div>
+          <div className="block">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
+          </div>
+          <div className="block">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+          </div>
+          <div className="block">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+          </div>
+        </div>
         <section className='section is-clipped'>
           <div className='container'>
             <div className='mb-24 columns is-multiline'>
@@ -86,61 +118,50 @@ export default function ProjectUpload({ }) {
 
                 
                 <div className='columns is-mobile is-multiline'>
-                  
 
-                
                 {
                   [1,2,3,4].map((item,index)=>{
                     return <ProjectImageSmall name={''} index={item} />
                   })
                 }
-                    
                   
-
                 </div>
+
               </div>
               <div className='column is-6'>
                 <div className='pl-20-desktop'>
-                  <div className=''>
+                  <div className='mb-6'>
                     <span className='has-text-grey-dark is-size-4'>{'Your Designer Name'}</span>
                     {/* <h1 className='title is-1 is-size-2-touch has-leading-2 has-mw-xl mt-2 mb-6 has-text-white'>
-                    <input class="input is-large" type="text" placeholder="Project Name"/>
+                    <input className="input is-large" type="text" placeholder="Project Name"/>
                     </h1> */}
-                    <div class="field mt-2">
-                      <label class="label is-medium">Project Name</label>
-                      <div class="control">
-                        <input class="input is-medium"  style={{maxHeight:40}} type="text" placeholder="My Keyboard"/>
+                    <div className="field mt-2">
+                      <div className="control">
+                        <input className="input is-large has-text-white"  style={{maxHeight:60, background:"#2B3239", borderColor:"#54606D", borderWidth:2, borderRadius:0}} type="text" placeholder="Enter Product Name"/>
                       </div>
                     </div>
-                    <div className='mb-0'>
-                      {/* <progress
-                        className='progress is-info'
-                        value={50}
-                        max={100}
-                      /> */}
+                    <div className="field">
+                      <div className="control">
+                        <input className="input is-large"  style={{maxHeight:60, background:"#2B3239", borderColor:"#54606D", borderWidth:2, borderRadius:0}} type="text" placeholder="Enter Price"
+                          onKeyDown={(event) => { if (!isNumberKey(event.key)) {event.preventDefault();}}}
+                        />
+                      </div>
+                    </div>
+                    <div className="field mb-4">
+                      <div className="control">
+                        <input className="input is-large"  style={{maxHeight:60, background:"#2B3239", borderColor:"#54606D", borderWidth:2, borderRadius:0}} type="text" placeholder="Enter Total Number of Units"
+                        onKeyDown={(event) => { if (!isNumberKey(event.key)) {event.preventDefault();}}}/>
+                      </div>
                     </div>
 
-                    <div class="columns mb-2" >
-                      <div class="column">
-                          <div class="field">
-                            <label class="label is-medium">Price</label>
-                            <div class="control">
-                              <input class="input is-medium"  style={{maxHeight:40}} type="text" placeholder="10000.00"
-                                onKeyDown={(event) => { if (!isNumberKey(event.key)) {event.preventDefault();}}}
-                              />
-                            </div>
-                          </div>
-                      </div>
-                      <div class="column">
-                          <div class="field">
-                            <label class="label is-medium">Max Quantity</label>
-                            <div class="control">
-                              <input class="input is-medium"  style={{maxHeight:40}} type="text" placeholder="300"
-                              onKeyDown={(event) => { if (!isNumberKey(event.key)) {event.preventDefault();}}}/>
-                            </div>
-                          </div>
-                      </div>
+                    <StatusPicker/>
+                    <div className="mt-4 mb-8" style={{fontStyle:"italic"}}>Note: Your product must be approved by Tabula to become a group buy. Setting the status to “Group Buy” sends a request to the Tabula Team.</div>
+
+                    <div className="field mt-4">
+                      <p className="has-text-grey is-size-4">Deadline: <input type="date" className="has-text-grey" style={{borderStyle:"solid",borderColor:"#54606D",colorScheme:"dark",outline:"none",fontSize:20, background:"#2B3239", borderWidth:2, borderRadius:0, padding:4}}></input></p>
                     </div>
+
+                    
 
 
                   </div>
@@ -157,66 +178,23 @@ export default function ProjectUpload({ }) {
                   </div>
 
 
-                  <div class="field has-addons" >
-                    <div class="control">
-                      <input class="input is-info" type="text" style={{maxHeight:40}} 
-                        placeholder="More option categories" 
+                  <div className="field has-addons mb-4" >
+                    <div className="control">
+                      <input className="input is-info has-text-white" type="text" style={{maxHeight:40, background:"#2B3239", borderColor:"#54606D", borderWidth:2, borderRadius:0}}
+                        placeholder="i.e. PCB, color" 
                         value={newOption}
                         onChange={e => { setNewOption(e.currentTarget.value);}}
                       />
                     </div>
-                    <div class="control">
-                      <input class="input has-background-info is-info has-text-white" type="submit" value="Add" style={{maxHeight:40}} onClick={() => addOptions(newOption)}/>
+                    <div className="control">
+                      <input className="input has-background-grey has-text-white" type="submit" value="Add Component" style={{maxHeight:40, borderRadius:0}} onClick={() => {addOptions(newOption); setNewOption("")}}/>
                     </div>
                   </div>
-
-                  <div class="field">
-                    <label class="label is-medium">Personal Link</label>
-                    <div class="control">
-                      <input class="input"  style={{maxHeight:40}} type="text" placeholder="Link to social media or personal website"/>
-                    </div>
-                  </div>
-
                   
-                  <div class="field mt-8">
-                      <div class="control">
-                        <button class="button is-fullwidth is-info">Publish</button>
-                      </div>
-                    </div>
-                    
-                 
-                  {/* <div className='is-flex is-align-items-center'>
-                    <p className='mb-0 mr-8 has-text-grey has-text-weight-bold'>
-                      FOLLOW DESIGNER
-                    </p>
-                    <button
-                      className='mr-1'
-                      style={{ width: 32, height: 32 }}
-                    >
-                      <img
-                        className='image'
-                        src='yofte-assets/buttons/facebook-circle.svg'
-                        alt=''
-                      />
-                    </button>
-                    <button
-                      className='mr-1'
-                      style={{ width: 32, height: 32 }}
-                    >
-                      <img
-                        className='image'
-                        src='yofte-assets/buttons/instagram-circle.svg'
-                        alt=''
-                      />
-                    </button>
-                    <button style={{ width: 32, height: 32 }}>
-                      <img
-                        className='image'
-                        src='yofte-assets/buttons/twitter-circle.svg'
-                        alt=''
-                      />
-                    </button>
-                  </div> */}
+                  
+
+
+                     
 
                 </div>
               </div>
@@ -227,21 +205,23 @@ export default function ProjectUpload({ }) {
                 <Tabs content={[
                     <div className="field">
                         <div className="control">
-                            <textarea className="textarea is-medium" placeholder="Enter Project Description Here"></textarea>
+                            <textarea className="textarea is-medium has-text-white" placeholder="Enter Project Description Here" 
+                              style={{background:"#2B3239", borderColor:"#54606D", borderWidth:2, borderRadius:0}}></textarea>
                         </div>
                     </div>,
-                    <p className="is-size-4">Community Forum under development</p>,
-                    <p className="is-size-4">Project Status Updates under development</p>
+                    <MessageSection messageType="comment"/>,
+                    <MessageSection messageType="update" postable={true}/>
                 ]
 
                 }/>
 
-                
-
+                <div className="has-text-centered">
+                  <button className="button is-medium">SAVE CHANGES</button>
+                </div>
 
             </div>
           </div>
         </section>
-      </>
+      </Layout>
     );
   }

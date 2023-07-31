@@ -12,26 +12,119 @@ datasource db {
   shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
 }
 
-model Designer {
-  id            Int       @id @default(autoincrement())
-  name          String
-  projects      Project[]
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  @@map(name: "designers")
+model User {
+  id              String       @default(cuid()) @id
+  username        String
+  password        String
+  email           String
+  billingAddress  String
+  designer        Boolean
+
+  groupBuys       GroupBuy[]
+  followers       Follow[]    @relation("follower")
+  follows         Follow[]    @relation("follow")
+  likedGroupBuys  GroupBuyLike[]
+  waitlists       WaitList[]
+  transactions    Transaction[]
+  comments        Comment[]
 }
 
 
-model Project {
-    id            String       @default(cuid()) @id
-    name          String
-    designer      Designer     @relation(fields: [designerId], references: [id])
-    designerId    Int
-    description   String?
-    published Boolean @default(false)
-    price         Float       @default(0.00)
-    options       Json?
-    takenUnits    Int
-    maxUnits      Int
-    status        Int
-    createdAt     DateTime  @default(now()) @map(name: "created_at")
+model GroupBuy {
+  id              String       @default(cuid()) @id
+  designer        User     @relation(fields: [designerId], references: [id])
+  designerId      String
+  name            String
+  price           Float       @default(0.00)
+  maxUnits        Int
+  currentUnits    Int
+  status          Int
+  submitDate      DateTime  @default(now()) @map(name: "created_at")
+  icDeadline      DateTime?
+  gbDeadline      DateTime?
+  completionDate  DateTime?
+  description     String?
+
+  likes           GroupBuyLike[]
+  waitlists       WaitList[]
+  transactions    Transaction[]
+  comments        Comment[]
+  pictures        GroupBuyPicture[]
+  components      Component[]
+  updates         Update[]
+}
+
+model Follow {
+  user            User     @relation("follower", fields: [userId], references: [id])
+  userId          String
+  designer        User     @relation("follow", fields: [designerId], references: [id])
+  designerId      String
+  @@id([userId, designerId])
+}
+
+model GroupBuyLike {
+  user            User      @relation(fields: [userId], references: [id])
+  userId          String
+  groupBuy        GroupBuy  @relation(fields: [groupBuyId], references: [id])
+  groupBuyId      String
+  value           Int
+  @@id([userId, groupBuyId])
+}
+
+model WaitList {
+  user            User      @relation(fields: [userId], references: [id])
+  userId          String
+  groupBuy        GroupBuy  @relation(fields: [groupBuyId], references: [id])
+  groupBuyId      String
+  @@id([userId, groupBuyId])
+}
+
+model Transaction {
+  user            User      @relation(fields: [userId], references: [id])
+  userId          String
+  groupBuy        GroupBuy  @relation(fields: [groupBuyId], references: [id])
+  groupBuyId      String
+  price           Float
+  insurance       Float     @default(0.00)
+  @@id([userId, groupBuyId])
+}
+
+model Comment {
+  id              String    @default(cuid()) @id
+  user            User      @relation(fields: [userId], references: [id])
+  userId          String
+  groupBuy        GroupBuy  @relation(fields: [groupBuyId], references: [id])
+  groupBuyId      String
+  body            String?
+  submitDate      DateTime  @default(now()) @map(name: "created_at")
+}
+
+model GroupBuyPicture {
+  id              String    @default(cuid()) @id
+  groupBuy        GroupBuy  @relation(fields: [groupBuyId], references: [id])
+  groupBuyId      String
+  path            String
+}
+
+model Component {
+  id              String    @default(cuid()) @id
+  groupBuy        GroupBuy  @relation(fields: [groupBuyId], references: [id])
+  groupBuyId      String
+  name            String
+  options         ComponentOption[]
+}
+
+model ComponentOption {
+  id              String       @default(cuid()) @id
+  component       Component    @relation(fields: [componentId], references: [id])
+  componentId     String
+  value           String  
+}
+
+model Update {
+  id              String       @default(cuid()) @id
+  groupBuy        GroupBuy  @relation(fields: [groupBuyId], references: [id])
+  groupBuyId      String
+  body            String?
+  submitDate      DateTime  @default(now()) @map(name: "created_at")
 }

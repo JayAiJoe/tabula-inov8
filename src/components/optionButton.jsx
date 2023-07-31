@@ -13,7 +13,7 @@ const OptionButton = ({value, activeOption, setActiveOption}) => {
     return(
         
         <div className='column is-4-touch is-4-desktop mb-0'>
-            <button onClick={handleClick} 
+            <button onClick={handleClick} style={{borderRadius : 8}}
             className={(activeOption === value ? "button is-white is-fullwidth has-text-weight-bold is-small" : "button is-light is-outlined is-fullwidth has-text-weight-bold is-small")}>
                 {value}
             </button> 

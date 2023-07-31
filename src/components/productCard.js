@@ -21,12 +21,12 @@ export default function ProductCard({ info }) {
 
     return (
         <Link href={`/projects/${info.id}`}>
-            <div className="card" style={{ marginLeft: 10, marginRight: 10  }}>
+            <div className="card" style={{ marginLeft: 10, marginRight: 10, borderRadius: 8 }}>
                 
                 <div className="card-image">
                     
 
-                    <figure className="image is-4by3">
+                    <figure className="image is-3by2">
                     <img src={`/images/${toLowerNoSpace(info.name)}/1.png`}
                         onError={(e) => {
                             e.target.onerror = null;
@@ -41,7 +41,7 @@ export default function ProductCard({ info }) {
                     <div className="media mb-2 ">
                         <div className="media-content">
                             <p className="title is-4 mb-0">{info.name}</p>
-                            <p className="subtitle is-5">{info.designer.name}</p>
+                            <p className="subtitle is-7">{info.designer.name}</p>
                             
                         </div>
                     </div>
@@ -50,15 +50,15 @@ export default function ProductCard({ info }) {
                             className="progress is-info"
                             value={info.takenUnits} max={info.maxUnits}/> */}
                         
-
-                        <span className='mr-2'>
+                        <p className='mr-2 is-size-7'>
                             <span className={(info.maxUnits - info.takenUnits < DANGER_THRESHOLD 
                             ? "has-text-danger"
                             : "") }
                             >{info.maxUnits - info.takenUnits} units left </span>
                             • {<ReactTimeAgo className="ml-2" date={parseISO(info.createdAt)} locale="en-US"/>}
 
-                        </span>
+                        </p>
+
                     </div>
                 </div>
                 <div className={getStatusTag(info.status)} style={{position:"absolute",top:'2%',right:'2%'}}>{STATUS[info.status]}</div>

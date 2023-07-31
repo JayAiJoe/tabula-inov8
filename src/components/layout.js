@@ -1,15 +1,20 @@
 
-import styles from './layout.module.css';
+
+import Navbar from "./navbar";
+import Footer from "./footer";
 
 const name = 'Your Name';
 export const siteTitle = 'Next.js Sample Website';
 
-export default function Layout({ children}) {
+export default function Layout({session, children}) {
   return (
-    <div className={styles.container}>
+    <div style={{minHeight:"100vh", display:"flex", flexDirection:"column"}}>
 
-
-      <main>{children}</main>
+      <Navbar session={session}/>
+      <main>
+        {children}
+      </main>
+      <Footer/>
 
     </div>
   );

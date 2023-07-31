@@ -10,7 +10,7 @@ const Tabs = ({content}) => {
         <div className="tabs is-large">
             <ul>
             <TabNavItem title="Description" id="tab1" activeTab={activeTab} setActiveTab={setActiveTab}/>
-            <TabNavItem title="Community" id="tab2" activeTab={activeTab} setActiveTab={setActiveTab}/>
+            <TabNavItem title="Comments" id="tab2" activeTab={activeTab} setActiveTab={setActiveTab}/>
             <TabNavItem title="Status" id="tab3" activeTab={activeTab} setActiveTab={setActiveTab}/>
             </ul>
         </div>
