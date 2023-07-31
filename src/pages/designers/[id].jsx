@@ -13,7 +13,7 @@ import { withSessionSsr } from '../../lib/config/withSession';
     async ({req, res}) => {
         const user = req.session.user;
 
-        let texts = req.url.split("/");
+        let texts = req.url.split("=");
         const id = texts[texts.length-1];
 
         const data = await getDesignerData(id);
@@ -65,7 +65,7 @@ import { withSessionSsr } from '../../lib/config/withSession';
 
 
 
-export default function DesignerPage({session, live, checks, drafts, completed, designerData}) {
+export default function DesignerPage({designerData,session, live, checks, drafts, completed}) {
 
     const numGroupBuys = 12;
     const dateString = "2018-05-18T04:00:00.000Z";

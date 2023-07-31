@@ -67,7 +67,6 @@ export default function Project({ projectData, session }) {
 
     const dateString = "2023-08-04T00:49:49+0000";
 
-    console.log(projectData.updates);
     return (
       <Layout session={session} >
         <section className='section is-clipped'>

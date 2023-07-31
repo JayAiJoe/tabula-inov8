@@ -4,6 +4,5 @@ export default withSessionRoute(logout);
 
 async function logout(req, res, session) {
     req.session.destroy();
-    console.log("Goodbye");
     res.status(200).send({ok: true})
 }
