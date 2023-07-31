@@ -13,8 +13,10 @@ import { withSessionSsr } from '../../lib/config/withSession';
     async ({req, res}) => {
         const user = req.session.user;
 
-        let texts = req.url.split("=");
+        let texts = req.url.split("/");
         const id = texts[texts.length-1];
+
+        console.log("Designer url", texts);
 
         const data = await getDesignerData(id);
         const allProducts = await getGroupBuysByDesigner(id);
@@ -79,7 +81,7 @@ export default function DesignerPage({designerData,session, live, checks, drafts
             <div className="box ml-24 mr-24" style={{borderRadius:32, backgroundColor:"#2B3239", borderColor:"#54606D", borderWidth:4}}>
                 <div className='columns has-text-grey '>
                     <div className='column is-8'>
-                        <p className='is-size-3 mb-6' style={{textDecoration:"underline"}}>{designerData.username}</p>
+                        <p className='is-size-3 mb-6' style={{textDecoration:"underline"}}>{designerData?.username}</p>
                         <p>{FILLERTEXT}</p>
                     </div>
                     <div className='column is-4'>
@@ -88,7 +90,7 @@ export default function DesignerPage({designerData,session, live, checks, drafts
                         <p className='is-size-1 mb-1 has-text-white'>{numLikes.toLocaleString()} <FontAwesomeIcon icon={faThumbsUp} style={{color:"#46CC6B"}}/> {numDislikes.toLocaleString()} <FontAwesomeIcon icon={faThumbsDown} style={{color:"#CC4746"}}/></p>
                         <p className='is-size-4 mb-4'>Tabula Partner since {formatDate(dateString)}</p>
 
-                        <FollowLinks designerName={designerData.username} numFollowers={numFollowers}/>
+                        <FollowLinks designerName={designerData?.username} numFollowers={numFollowers}/>
 
 
                     </div>

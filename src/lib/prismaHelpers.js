@@ -123,7 +123,7 @@ export async function getProjectData(pid) {
   });
 
   let cmt = [];
-  project.comments.map((comment) =>(
+  await project.comments.map((comment) =>(
     cmt.push({
       user: {username: comment.user.username}, 
       body : comment.body, 
@@ -133,7 +133,7 @@ export async function getProjectData(pid) {
 
 
   let upd = [];
-  project.updates.map((update) => (
+  await project.updates.map((update) => (
     upd.push({
       user:{username:project.designer.username}, 
       body : update.body, 
