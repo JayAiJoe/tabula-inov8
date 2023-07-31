@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../../components/layout';
 import DashboardCarousel from '../../components/dashboardCarousel';
-import { defaultUser, formatDate } from '../../lib/utils';
+import { defaultUser, formatDate, FILLERTEXT } from '../../lib/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faThumbsUp, faThumbsDown, faPenToSquare} from "@fortawesome/free-solid-svg-icons";
 import FollowLinks from '../../components/followLinks';
@@ -67,7 +67,6 @@ import { withSessionSsr } from '../../lib/config/withSession';
 
 export default function DesignerPage({session, live, checks, drafts, completed, designerData}) {
 
-    const text = "Hi, here's Owlab again :)As some of you may know, we just launched our second project of the year - Link65. Thanks to all the support from our customers, the sale went smoothly, and we have started to fulfill orders earlier this week.\n\nWhile working on innovative designs at affordable costs, we always want to bring up some small-factor gadgets. However, layouts under 60% are niche in this community and will lead to much higher price tags, so we were not brave enough to step up. Luckily, we were able to partner with Tabula which has helped us further expand our reach! Please continue to look forward to our products here!"
     const numGroupBuys = 12;
     const dateString = "2018-05-18T04:00:00.000Z";
     const numLikes = 1023;
@@ -81,7 +80,7 @@ export default function DesignerPage({session, live, checks, drafts, completed, 
                 <div className='columns has-text-grey '>
                     <div className='column is-8'>
                         <p className='is-size-3 mb-6' style={{textDecoration:"underline"}}>{designerData.username}</p>
-                        <p>{text}</p>
+                        <p>{FILLERTEXT}</p>
                     </div>
                     <div className='column is-4'>
                         <p className='is-size-5 mb-2 has-text-white'>Designer Details</p>

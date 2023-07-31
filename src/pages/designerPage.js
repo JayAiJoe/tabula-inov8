@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../components/layout';
 import DashboardCarousel from '../components/dashboardCarousel';
-import { defaultUser, formatDate } from '../lib/utils';
+import { defaultUser, formatDate, FILLERTEXT } from '../lib/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faThumbsUp, faThumbsDown, faPenToSquare} from "@fortawesome/free-solid-svg-icons";
 import FollowLinks from '../components/followLinks';
@@ -72,7 +72,7 @@ export default function DesignerPage({session, live, checks, drafts, completed})
                 <div className='columns has-text-grey '>
                     <div className='column is-8'>
                         <p className='is-size-3 mb-6' style={{textDecoration:"underline"}}>{session.username}<FontAwesomeIcon icon={faPenToSquare} className='ml-2'/></p>
-                        <p>{text}</p>
+                        <p>{FILLERTEXT}</p>
                     </div>
                     <div className='column is-4'>
                         <p className='is-size-5 mb-2 has-text-white'>Designer Details</p>
