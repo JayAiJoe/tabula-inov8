@@ -5,7 +5,7 @@ import { defaultUser, formatDate, FILLERTEXT } from '../../lib/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faThumbsUp, faThumbsDown, faPenToSquare} from "@fortawesome/free-solid-svg-icons";
 import FollowLinks from '../../components/followLinks';
-import { getGroupBuysByDesigner, getDesignerData } from '../../lib/prismaHelpers';
+import { getDesignerData } from '../../lib/prismaHelpers';
 import { withSessionSsr } from '../../lib/config/withSession';
 
 
@@ -19,7 +19,7 @@ import { withSessionSsr } from '../../lib/config/withSession';
         console.log("Designer url", texts);
 
         const data = await getDesignerData(id);
-        const allProducts = await getGroupBuysByDesigner(id);
+        // const allProducts = await getGroupBuysByDesigner(id);
 
 
         let live = []
@@ -27,7 +27,9 @@ import { withSessionSsr } from '../../lib/config/withSession';
         let drafts = []
         let completed = []
 
-        allProducts.map((gb) => {
+        
+
+        data.groupBuys.map((gb) => {
             switch(gb.status){
                 case 0: drafts.push(gb); break;
                 case 1: checks.push(gb); break;
@@ -36,12 +38,12 @@ import { withSessionSsr } from '../../lib/config/withSession';
             }
         });
 
-
+        console.log("checks", checks);
   
         if(!user) {
             return {
                 props: {
-                    designerData : data,
+                    designerData : {username: data.username},
                     session : defaultUser,
                     live: JSON.parse(JSON.stringify(live)),
                     checks: JSON.parse(JSON.stringify(checks)),
@@ -53,7 +55,7 @@ import { withSessionSsr } from '../../lib/config/withSession';
   
         return {
             props: {
-                designerData : data,
+                designerData : {username: data.username},
                 session : user,
                 live: JSON.parse(JSON.stringify(live)),
                 checks: JSON.parse(JSON.stringify(checks)),
@@ -79,7 +81,7 @@ export default function DesignerPage({designerData,session, live, checks, drafts
         <Layout session={session}>
             <div className="mt-8">
             <div className="box ml-24 mr-24" style={{borderRadius:32, backgroundColor:"#2B3239", borderColor:"#54606D", borderWidth:4}}>
-                <div className='columns has-text-grey '>
+                <div className='columns has-text-grey is-vcentered'>
                     <div className='column is-8'>
                         <p className='is-size-3 mb-6' style={{textDecoration:"underline"}}>{designerData.username}</p>
                         <p style={{whiteSpace:"pre-line"}}>{FILLERTEXT}</p>

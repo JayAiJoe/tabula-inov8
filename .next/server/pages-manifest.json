@@ -1,9 +1,18 @@
 {
   "/_app": "pages/_app.js",
-  "/_document": "pages/_document.js",
+  "/api/logout": "pages/api/logout.js",
   "/_error": "pages/_error.js",
-  "/": "pages/index.js",
+  "/api/search": "pages/api/search.js",
+  "/api/sessions": "pages/api/sessions.js",
+  "/api/searchDesigners": "pages/api/searchDesigners.js",
+  "/designers": "pages/designers.js",
+  "/designerPage": "pages/designerPage.js",
   "/designers/[id]": "pages/designers/[id].js",
+  "/": "pages/index.js",
+  "/searchDesigners": "pages/searchDesigners.js",
+  "/search": "pages/search.js",
+  "/projectUpload": "pages/projectUpload.js",
   "/projects/[id]": "pages/projects/[id].js",
-  "/designers": "pages/designers.js"
+  "/_document": "pages/_document.js",
+  "/404": "pages/404.html"
 }

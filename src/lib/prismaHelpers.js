@@ -87,6 +87,9 @@ export async function getDesignerData(id){
     where: {
       id: id
     },
+    include:{
+      groupBuys : {include: {designer : {select: {username: true}}}}
+    }
   })
   return user;
 }
