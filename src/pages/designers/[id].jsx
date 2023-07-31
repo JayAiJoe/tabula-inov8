@@ -67,23 +67,21 @@ import { withSessionSsr } from '../../lib/config/withSession';
 
 export default function DesignerPage({session, live, checks, drafts, completed, designerData}) {
 
-    const text = "Introducing the Epic Keyboards Collection from ProKeys! Elevate Your Typing Experience to the Next Level!\n\n Hey there, keyboard enthusiasts and tech aficionados! Are you ready to dive into a world of premium typing experiences and cutting-edge design? Look no further, because ProKeys is here to redefine your keyboard game! \n\nCraftsmanship at its Finest:\nGet ready to be wowed! Our keyboards are meticulously designed by a team of passionate keyboard lovers, combining sleek aesthetics with functionality. Each model is a masterpiece, crafted to perfection.\n\nStyle Meets Comfort:\nSay goodbye to clunky and uncomfortable keyboards! With ProKeys, you'll experience an ergonomic design that keeps your hands happy during those long typing sessions. Your comfort matters, and we've got you covered!";
+    const text = "Hi, here's Owlab again :)As some of you may know, we just launched our second project of the year - Link65. Thanks to all the support from our customers, the sale went smoothly, and we have started to fulfill orders earlier this week.\n\nWhile working on innovative designs at affordable costs, we always want to bring up some small-factor gadgets. However, layouts under 60% are niche in this community and will lead to much higher price tags, so we were not brave enough to step up. Luckily, we were able to partner with Tabula which has helped us further expand our reach! Please continue to look forward to our products here!"
     const numGroupBuys = 12;
     const dateString = "2018-05-18T04:00:00.000Z";
     const numLikes = 1023;
     const numDislikes = 23;
     const numFollowers = 4269;
 
-    console.log("designer data", designerData);
-
     return (
         <Layout session={session}>
             <div className="mt-8">
             <div className="box ml-24 mr-24" style={{borderRadius:32, backgroundColor:"#2B3239", borderColor:"#54606D", borderWidth:4}}>
-                <div className='columns is-vcentered has-text-grey '>
+                <div className='columns has-text-grey '>
                     <div className='column is-8'>
                         <p className='is-size-3 mb-6' style={{textDecoration:"underline"}}>{designerData.username}</p>
-                        <p style={{whiteSpace: "pre-line"}}>{text}</p>
+                        <p>{text}</p>
                     </div>
                     <div className='column is-4'>
                         <p className='is-size-5 mb-2 has-text-white'>Designer Details</p>
@@ -102,7 +100,7 @@ export default function DesignerPage({session, live, checks, drafts, completed, 
 
             <DashboardCarousel products={live} title={'Live Group Buys'}/>
             <DashboardCarousel products={checks} title={'Interest Checks'}/>
-            {/* <DashboardCarousel products={drafts} title={'Pending'}/> */}
+            <DashboardCarousel products={drafts} title={'Pending'}/>
             <DashboardCarousel products={completed} title={'Completed Group Buys'}/>
             </div>
         </Layout>

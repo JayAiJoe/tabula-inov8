@@ -20,7 +20,7 @@ async function createSessionRoute(req, res) {
                 isDesigner: user.designer,
             };
             await req.session.save();
-            res.send({ ok: true });
+            return res.send({ ok: true });
         }
         return res.status(403).send("");
     }
