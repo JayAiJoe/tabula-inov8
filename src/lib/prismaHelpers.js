@@ -17,9 +17,8 @@ export async function getAllProjectIds() {
 export async function searchGroupBuys(searchWord) {
   const result = await prisma.GroupBuy.findMany({
     include: {
-      designer: {
-        select: { username: true },
-      },
+      designer: {select: { username: true }},
+      pictures : {select : {path : true}, take : 1},
    },
     where: {
       OR: [
@@ -50,9 +49,8 @@ export async function searchDesigners(searchWord) {
 export async function getGroupBuysByDesigner(dId){
   const result = await prisma.GroupBuy.findMany({
     include: {
-      designer: {
-        select: { username: true },
-      },
+      designer: {select: { username: true }},
+      pictures : {select : {path : true}, take : 1},
    },
     where: {
         designerId : dId
@@ -121,7 +119,8 @@ export async function getProjectData(pid) {
           },
           updates : {
             orderBy : {submitDate : 'desc'},
-          }
+          },
+          pictures: {select: {path : true}},
       },
   });
 
@@ -155,5 +154,6 @@ export async function getProjectData(pid) {
     currentUnits : project.currentUnits,
     comments : cmt,
     updates : upd,
+    pictures : project.pictures,
   };
 }

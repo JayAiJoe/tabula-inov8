@@ -41,7 +41,8 @@ const Navbar = ({session}) => {
   <div className="navbar-menu ml-10 is-align-items-center">
     <div className="navbar-start" style={{width: '100%'}}>
       <div className="ml-auto"/>
-      <Link className="navbar-item" href="/">Products</Link>
+      <Link className="navbar-item" href="/">Home</Link>
+      <Link className="navbar-item" href="/products">Products</Link>
       <Link className="navbar-item" href="/designers">Designers</Link>
       {session?.isDesigner && 
         <>

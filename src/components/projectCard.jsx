@@ -16,7 +16,7 @@ const ProjectCard = ({info, freeSize = true}) => {
                     
 
                     <figure className="image is-3by2">
-                    <img src={`/images/${toLowerNoSpace(info.name)}/1.png`}
+                    <img src={info.pictures ? info.pictures[0].path : PLACEHOLDER_IMAGE}
                         onError={(e) => {
                             e.target.onerror = null;
                             e.target.src = PLACEHOLDER_IMAGE;

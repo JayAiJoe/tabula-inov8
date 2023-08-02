@@ -46,7 +46,7 @@ export default function Designers({session, designers}) {
     <Layout session={session} >
       <div className="mt-8">
         <SearchBar word={searchWord} typeHandler={handleChange} enterHandler={handleKeyDown}/>
-        <div className="mb-20 columns is-multiline" style={{ marginLeft: 10, marginRight: 10}}>
+        <div className="mb-20 columns is-multiline ml-20 mr-20" style={{ marginLeft: 10, marginRight: 10}}>
         {designers.map((designer, index) => (
           <DesignerCard info={designer} key={index}/>
         ))}

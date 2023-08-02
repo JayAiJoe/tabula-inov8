@@ -60,6 +60,7 @@ export default function Search({session}) {
             router.push(`/search?q=${encodedQuery}`);
         }
     };
+
     return(
         <Layout session={session} >
             <div className="mt-8">

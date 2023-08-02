@@ -1,12 +1,12 @@
 import React from 'react';
 import Layout from '../../components/layout';
-import DashboardCarousel from '../../components/dashboardCarousel';
 import { defaultUser, formatDate, FILLERTEXT } from '../../lib/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faThumbsUp, faThumbsDown, faPenToSquare} from "@fortawesome/free-solid-svg-icons";
 import FollowLinks from '../../components/followLinks';
 import { getDesignerData } from '../../lib/prismaHelpers';
 import { withSessionSsr } from '../../lib/config/withSession';
+import CarouselCard from '../../components/carouselCard';
 
 
   export const getServerSideProps = withSessionSsr(
@@ -15,8 +15,6 @@ import { withSessionSsr } from '../../lib/config/withSession';
 
         let texts = req.url.split(/\/|=/);
         const id = texts[texts.length-1];
-
-        console.log("Designer url", texts);
 
         const data = await getDesignerData(id);
         // const allProducts = await getGroupBuysByDesigner(id);
@@ -27,18 +25,16 @@ import { withSessionSsr } from '../../lib/config/withSession';
         let drafts = []
         let completed = []
 
-        
 
-        data.groupBuys.map((gb) => {
-            switch(gb.status){
-                case 0: drafts.push(gb); break;
-                case 1: checks.push(gb); break;
-                case 2: live.push(gb); break;
-                case 3: completed.push(gb); break;
-            }
-        });
+        // data.groupBuys.map((gb) => {
+        //     switch(gb.status){
+        //         case 0: drafts.push(gb); break;
+        //         case 1: checks.push(gb); break;
+        //         case 2: live.push(gb); break;
+        //         case 3: completed.push(gb); break;
+        //     }
+        // });
 
-        console.log("checks", checks);
   
         if(!user) {
             return {
@@ -69,7 +65,7 @@ import { withSessionSsr } from '../../lib/config/withSession';
 
 
 
-export default function DesignerPage({designerData,session, live, checks, drafts, completed}) {
+export default function GeneralDesignerPage({designerData,session, live, checks, drafts, completed}) {
 
     const numGroupBuys = 12;
     const dateString = "2018-05-18T04:00:00.000Z";
@@ -101,10 +97,10 @@ export default function DesignerPage({designerData,session, live, checks, drafts
 
 
 
-            <DashboardCarousel products={live} title={'Live Group Buys'}/>
-            <DashboardCarousel products={checks} title={'Interest Checks'}/>
-            <DashboardCarousel products={drafts} title={'Pending'}/>
-            <DashboardCarousel products={completed} title={'Completed Group Buys'}/>
+            <CarouselCard products={live} title={'Live Group Buys'}/>
+            <CarouselCard products={checks} title={'Interest Checks'}/>
+            <CarouselCard products={drafts} title={'Pending'}/>
+            <CarouselCard products={completed} title={'Completed Group Buys'}/>
             </div>
         </Layout>
     );

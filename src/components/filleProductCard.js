@@ -13,8 +13,8 @@ export default function FillerProductCard() {
                     </figure>
                     
                 </div> */}
-                <div class="card-content">
-                    <div class="content" style={{minHeight:100}}>
+                <div className="card-content">
+                    <div className="content" style={{minHeight:100}}>
                     </div>
                 </div>
             </div>

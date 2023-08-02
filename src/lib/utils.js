@@ -53,3 +53,17 @@ export const defaultUser = {
     username: "Guest",
     isDesigner: false,
 }
+
+
+export const TABULA_GUIDELINES = "TABULA GUIDELINES\n\t\
+1. As a designer, you are required to submit a request for an interest check for any groupbuys you may want to host.\n\t\
+2. Once you reach your Minimum Order Quantity for your groupbuy within your interest check, you may submit a request to host a groupbuy on Tabula.\n\t\
+3. Tabula will review your interest check and will contact you if any issues regarding the details of your groupbuy exist.\n\t\
+4. If everything has been approved, your groupbuy will be accepted and go live on the website.\n\t\
+5. As per the hosting guidelines, Tabula’ set hosting fee of 10% will be deducted from the groupbuy’s total revenue. Any and all availed insurance fees are to proceed to Tabula.\n\t\
+6. Tabula reserves the right to discontinue any existing groupbuy as the company deems necessary for any reason whatsoever.\n\t\
+7. Reminders:\n\t\t\
+a. Tabula is not liable for the production of any boards. You must facilitate the production of your own design.\n\t\t\
+b. The shipping services to be handled by Tabula are limited to only to boards produced in the Philippines and shipped to locations in the Philippines.\n\t\t    The shipping of boards produced outside the Philippines or those that will be shipped outside the Philippines should be handled by the designers.\n\t\t\
+c. It is HIGHLY ENCOURAGED for all designers to update the update tab of their groupbuys at least TWICE a month.\
+"

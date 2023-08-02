@@ -1,12 +1,12 @@
 import React from 'react';
 import Layout from '../components/layout';
-import DashboardCarousel from '../components/dashboardCarousel';
 import { defaultUser, formatDate, FILLERTEXT } from '../lib/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faThumbsUp, faThumbsDown, faPenToSquare} from "@fortawesome/free-solid-svg-icons";
 import FollowLinks from '../components/followLinks';
 import { getGroupBuysByDesigner } from '../lib/prismaHelpers';
 import { withSessionSsr } from '../lib/config/withSession';
+import CarouselCard from '../components/carouselCard';
 
 
 export const getServerSideProps = withSessionSsr(
@@ -88,11 +88,10 @@ export default function DesignerPage({session, live, checks, drafts, completed})
             </div>
 
 
-
-            <DashboardCarousel products={live} title={'Live Group Buys'}/>
-            <DashboardCarousel products={checks} title={'Interest Checks'}/>
-            <DashboardCarousel products={drafts} title={'Pending'}/>
-            <DashboardCarousel products={completed} title={'Completed Group Buys'}/>
+            <CarouselCard products={live} title={'Live Group Buys'}/>
+            <CarouselCard products={checks} title={'Interest Checks'}/>
+            <CarouselCard products={drafts} title={'Pending'}/>
+            <CarouselCard products={completed} title={'Completed Group Buys'}/>
             </div>
         </Layout>
     );

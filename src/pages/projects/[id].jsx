@@ -1,6 +1,6 @@
 import { getProjectData } from '../../lib/prismaHelpers';
 import OptionSet from '../../components/optionSet';
-import { toLowerNoSpace } from '../../lib/utils';
+import { PLACEHOLDER_IMAGE, toLowerNoSpace } from '../../lib/utils';
 import ProjectImageSmall from '../../components/projectImageSmall';
 import Tabs from '../../components/projectPageTabs';
 import { DANGER_THRESHOLD } from '../../lib/utils';
@@ -13,24 +13,6 @@ import { withSessionSsr } from '../../lib/config/withSession';
 
 
 
-// export async function getStaticPaths() {
-//     const paths = await getAllProjectIds();
-//     return {
-//       paths,
-//       fallback: false,
-//     };
-//   }
-
-//   export async function getStaticProps({ params }) {
-//     const data = await getProjectData(params.id);
-//     return {
-//       props: {
-//         projectData : data,
-//         session : defaultUser,
-//       }
-//     };
-//   }
-
 
   export const getServerSideProps = withSessionSsr(
     async ({req, res}) => {
@@ -38,8 +20,6 @@ import { withSessionSsr } from '../../lib/config/withSession';
 
         let texts = req.url.split(/\/|=/);
         const id = texts[texts.length-1];
-
-        console.log("Product url", texts);
 
         const data = await getProjectData(id);
   
@@ -96,7 +76,7 @@ export default function Project({ projectData, session }) {
                     </svg>
                   </button>
                   <figure className="image is-4by3">
-                    <img src={`/images/${toLowerNoSpace(projectData.name)}/1.png`}
+                    <img src={projectData.pictures[0].path} placeholder={PLACEHOLDER_IMAGE}
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.src = PLACEHOLDER_IMAGE;
@@ -129,8 +109,12 @@ export default function Project({ projectData, session }) {
 
                 
                 {
-                  [1,2,3,4].map((item,index)=>{
-                    return <ProjectImageSmall name={toLowerNoSpace(projectData.name)} index={item} key={index}/>
+                  [0,1,2,3].map((ctr,index)=>{
+                    let src = '';
+                    if(index < projectData.pictures.length) {
+                      src = projectData.pictures[index].path;
+                    }
+                    return <ProjectImageSmall src={src}  key={index}/>
                   })
                 }
                     

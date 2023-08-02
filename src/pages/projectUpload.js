@@ -2,11 +2,8 @@ import React, {useState, useRef, useEffect} from "react";
 import OptionSet from '../components/optionSet';
 import ProjectImageSmall from '../components/projectImageSmall';
 import Tabs from "../components/projectPageTabs";
-import ImageUpload from "../components/imageUpload";
-import { TagsInput } from "react-tag-input-component"; 
 import TagInputField from "../components/tagInputField";
-import { set } from "date-fns";
-import { PLACEHOLDER_IMAGE, isNumberKey } from "../lib/utils";
+import { PLACEHOLDER_IMAGE, TABULA_GUIDELINES, isNumberKey } from "../lib/utils";
 import MessageSection from "../components/messageSection";
 import Layout from "../components/layout";
 import { withSessionSsr } from "../lib/config/withSession";
@@ -51,17 +48,8 @@ export default function ProjectUpload({session}) {
 
     return(
         <Layout session={session} >
-        <div className="ml-16 mr-16 mt-4">
-          <div className="block"><b>TABULA GUIDELINES:</b></div>
-          <div className="block">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
-          </div>
-          <div className="block">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-          </div>
-          <div className="block">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-          </div>
+        <div className="ml-16 mr-16 mt-4" style={{whiteSpace:"pre-wrap"}}>
+          {TABULA_GUIDELINES}
         </div>
         <section className='section is-clipped'>
           <div className='container'>
@@ -121,7 +109,7 @@ export default function ProjectUpload({session}) {
 
                 {
                   [1,2,3,4].map((item,index)=>{
-                    return <ProjectImageSmall name={''} index={item} />
+                    return <ProjectImageSmall name={''} index={item} key={index}/>
                   })
                 }
                   
@@ -166,11 +154,7 @@ export default function ProjectUpload({session}) {
 
                   </div>
 
-                  
-                  {/* {Object.keys(filler).map((key) => (
-                    <OptionSet name={key} options={filler[key]}/>
-                  ))} */}
-                  
+              
                   <div>
                     {optionsList.map((option, index) => (
                       <TagInputField key={index} label={option}/>
