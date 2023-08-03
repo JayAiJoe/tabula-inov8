@@ -92,7 +92,7 @@ export default function Index({session, live, checks, designers}) {
   };
 
   return (
-    <Layout session={session} >
+    <Layout session={session} nav_selected={"Home"}>
       <div className="mt-8">
         <SearchBar word={searchWord} typeHandler={handleChange} enterHandler={handleKeyDown}/>
         {/* {session.id == '000'? <div/> : <CarouselCard products={checks} labels={{title:'Interest Checks', subtitle:''}}/>} */}

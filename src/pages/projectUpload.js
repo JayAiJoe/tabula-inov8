@@ -47,7 +47,7 @@ export default function ProjectUpload({session}) {
     const [newOption, setNewOption] = useState('');
 
     return(
-        <Layout session={session} >
+        <Layout session={session} nav_selected={"New Project"}>
         <div className="ml-16 mr-16 mt-4" style={{whiteSpace:"pre-wrap"}}>
           {TABULA_GUIDELINES}
         </div>

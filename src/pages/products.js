@@ -51,7 +51,7 @@ export default function Products({session, products}) {
   };
 
   return (
-    <Layout session={session} >
+    <Layout session={session} nav_selected={"Products"}>
       <div className="mt-8">
         <SearchBar word={searchWord} typeHandler={handleChange} enterHandler={handleKeyDown}/>
         <div className="mb-20 columns is-multiline ml-20 mr-20" style={{ marginLeft: 10, marginRight: 10}}>

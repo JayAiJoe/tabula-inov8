@@ -74,7 +74,7 @@ export default function GeneralDesignerPage({designerData,session, live, checks,
     const numFollowers = 4269;
 
     return (
-        <Layout session={session}>
+        <Layout session={session} nav_selected={"Designers"}>
             <div className="mt-8">
             <div className="box ml-24 mr-24" style={{borderRadius:32, backgroundColor:"#2B3239", borderColor:"#54606D", borderWidth:4}}>
                 <div className='columns has-text-grey is-vcentered'>

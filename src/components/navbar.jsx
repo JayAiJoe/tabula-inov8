@@ -5,9 +5,13 @@ import { LogInBox } from "./loginBox";
 import { useRouter } from "next/router";
 
 
-const Navbar = ({session}) => {
+const selected_style = "has-background-dark has-text-white is-rounded";
+
+const Navbar = ({session, selected}) => {
   const router = useRouter();
   const[login, setLog] = useState(false);
+
+  
 
   const toggleSignIn = () => {
     setLog(!login);
@@ -41,13 +45,13 @@ const Navbar = ({session}) => {
   <div className="navbar-menu ml-10 is-align-items-center">
     <div className="navbar-start" style={{width: '100%'}}>
       <div className="ml-auto"/>
-      <Link className="navbar-item" href="/">Home</Link>
-      <Link className="navbar-item" href="/products">Products</Link>
-      <Link className="navbar-item" href="/designers">Designers</Link>
+      <Link className={"navbar-item " + (selected == "Home" ? selected_style : "")}  href="/" >Home</Link>
+      <Link className={"navbar-item " + (selected == "Products" ? selected_style : "")} href="/products">Products</Link>
+      <Link className={"navbar-item " + (selected == "Designers" ? selected_style : "")} href="/designers">Designers</Link>
       {session?.isDesigner && 
         <>
-          <Link className="navbar-item" href="/projectUpload">New Project</Link>
-          <Link className="navbar-item" href="/designerPage">Dashboard</Link>
+          <Link className={"navbar-item " + (selected == "New Project" ? selected_style : "")} href="/projectUpload">New Project</Link>
+          <Link className={"navbar-item " + (selected == "Dashboard" ? selected_style : "")} href="/designerPage">Dashboard</Link>
         </>
       }
       <div className="mr-auto"/>

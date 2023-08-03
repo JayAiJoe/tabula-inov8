@@ -50,7 +50,7 @@ export default function Project({ projectData, session }) {
     const dateString = "2023-08-04T00:49:49+0000";
 
     return (
-      <Layout session={session} >
+      <Layout session={session} nav_selected={"Products"} >
         <section className='section is-clipped'>
           <div className='container'>
             <div className='mb-24 columns is-multiline'>
