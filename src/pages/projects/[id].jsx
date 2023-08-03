@@ -1,15 +1,15 @@
 import { getProjectData } from '../../lib/prismaHelpers';
 import OptionSet from '../../components/optionSet';
-import { PLACEHOLDER_IMAGE, toLowerNoSpace } from '../../lib/utils';
+import { INSURANCE_RATE, PLACEHOLDER_IMAGE, toLowerNoSpace } from '../../lib/utils';
 import ProjectImageSmall from '../../components/projectImageSmall';
 import Tabs from '../../components/projectPageTabs';
-import { DANGER_THRESHOLD } from '../../lib/utils';
 import FollowLinks from '../../components/followLinks';
 import { formatDate } from '../../lib/utils';
 import MessageSection from '../../components/messageSection';
 import Layout from '../../components/layout';
 import { defaultUser } from '../../lib/utils';
 import { withSessionSsr } from '../../lib/config/withSession';
+import { useState } from 'react';
 
 
 
@@ -48,6 +48,8 @@ import { withSessionSsr } from '../../lib/config/withSession';
 export default function Project({ projectData, session }) {
 
     const dateString = "2023-08-04T00:49:49+0000";
+
+    const [insuranceActive, setInsuranceActive] = useState(false);
 
     return (
       <Layout session={session} nav_selected={"Products"} >
@@ -130,7 +132,7 @@ export default function Project({ projectData, session }) {
                   <div className='mb-8'>
                     <div className='has-text-grey is-size-4'>{projectData.designer}</div>
                     <div className='has-text-white is-size-1' style={{fontWeight:600}}>{projectData.name}</div>
-                    <div className='has-text-white is-size-2' style={{fontWeight:600}}>P{parseFloat(projectData.price.toFixed(2)).toLocaleString()}</div>
+                    <div className='has-text-white is-size-2' style={{fontWeight:600}}>P{parseFloat(projectData.price).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
 
                     {projectData.status == 1 && <div className='has-text-grey is-size-4'>{projectData.currentUnits} out of {projectData.maxUnits} people in waitlist</div>}
                     {projectData.status == 2 && <div className='has-text-grey is-size-4'>{projectData.maxUnits - projectData.currentUnits} units left</div>}
@@ -150,7 +152,7 @@ export default function Project({ projectData, session }) {
                         <label className="is-checkbox is-rounded">
                           <input type="checkbox"/>
                           
-                          <span className='ml-4 is-size-5'>Include product insurance: P{(projectData.price * 0.03).toFixed(2)}.  <span className='has-text-grey' style={{textDecoration:"underline"}}>Learn more.</span></span>
+                          <span className='ml-4 is-size-5'>Include product insurance: P{parseFloat(projectData.price * INSURANCE_RATE * 1.12).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}.  <span className='has-text-grey' style={{textDecoration:"underline"}} onClick={()=>{setInsuranceActive(!insuranceActive);}}>Learn more.</span></span>
                           
                           </label>
                       </span>
@@ -220,6 +222,38 @@ export default function Project({ projectData, session }) {
                   ]
 
               }/>
+          </div>
+
+          <div className={"modal full-width ml-auto mr-auto " + (insuranceActive? "is-active":"")} style={{zIndex:2000}}>
+            <div className="modal-background"></div>
+            <div className="modal-content">
+              <div className='box' style={{whiteSpace:"pre-line"}}>
+                <span className='is-size-5' style={{fontWeight:600}}>Insurance Calculation</span>
+                {"\n\
+                Unit Price: P" + parseFloat(projectData.price).toLocaleString(undefined, {minimumFractionDigits: 2}) + "\n\
+                Insurance: P" + parseFloat(projectData.price * INSURANCE_RATE).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) +" (5%) x 1.12 = P"
+                + parseFloat(projectData.price * INSURANCE_RATE * 1.12).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})+ " including taxes\n\
+                \n\ "
+                }
+                <span className='is-size-5' style={{fontWeight:600}}>Insurance Policy</span>
+                {"\n\
+                1. Delays\n\
+                After 30 days\n\
+                10% of unit price every 10 days delayed\n\
+                \n\
+                2. Lost in Transit\n\
+                90% of unit price claimable\n\
+                \n\
+                3. Faulty Product\n\
+                90% of Repair Costs\n\
+                \n\
+                4. Fortuitous Events (flood/typhoon, fire, etc)\n\
+                90% of unit price claimable\n\
+                "}
+                
+              </div>
+            </div>
+            <button className="modal-close is-large" aria-label="close" onClick={()=>{setInsuranceActive(!insuranceActive);}}></button>
           </div>
         </section>
       </Layout>

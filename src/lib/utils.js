@@ -67,3 +67,6 @@ a. Tabula is not liable for the production of any boards. You must facilitate th
 b. The shipping services to be handled by Tabula are limited to only to boards produced in the Philippines and shipped to locations in the Philippines.\n\t\t    The shipping of boards produced outside the Philippines or those that will be shipped outside the Philippines should be handled by the designers.\n\t\t\
 c. It is HIGHLY ENCOURAGED for all designers to update the update tab of their groupbuys at least TWICE a month.\
 "
+
+
+export const INSURANCE_RATE = 0.03;
