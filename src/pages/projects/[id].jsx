@@ -239,7 +239,7 @@ export default function Project({ projectData, session }) {
                 {"\n\
                 1. Delays\n\
                 After 30 days\n\
-                10% of unit price every 10 days delayed\n\
+                10% of unit price every 30 days delayed\n\
                 \n\
                 2. Lost in Transit\n\
                 90% of unit price claimable\n\
